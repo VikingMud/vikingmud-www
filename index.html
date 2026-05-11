@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Home</title>
+
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="#connect">Play</a>
+      <a href="#guilds">Guilds</a>
+      <a href="#news">News</a>
+      <a href="#community">Wiki</a>
+      <a href="#community">Contact</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse"></span>
+      <span id="live-nav-status">9 online · uptime 11 hours</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="col col-24">
+        <span class="eyebrow">A text-realm since 1991</span>
+        <div class="title-block">
+          <h1 class="h-display">Viking<br>MUD</h1>
+          <span class="est">XXXV · anno tricesimo quinto</span>
+        </div>
+        <p class="lede lede-mt">
+          A handcrafted, fantacy world built from words. Walk the roots of
+          Yggdrasil, join a guild, fight monsters, and write yourself into a
+          saga that has been running every day for thirty-five years.
+        </p>
+        <div class="hero-cta">
+          <a href="#connect" class="btn">Enter the realm <span class="arrow">→</span></a>
+          <a href="#intro" class="btn btn-ghost">What is a MUD?</a>
+        </div>
+        <div class="hero-meta">
+          <span><b>vikingmud.org</b> · port 2001</span>
+          <span id="live-hero-online">17 souls online</span>
+          <span>News · 19 mar 2026</span>
+        </div>
+      </div>
+      <div>
+        <div class="ygg">
+          <img class="ygg-img" src="yggdrasil.png" alt="Yggdrasil — the world tree">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Terminal demo ─────────────────────────────────────────────────── -->
+<section class="sec-demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">00<span>Live demo</span></div>
+      <h2 class="sec-title">Take a turn,<br>see what happens.</h2>
+    </div>
+    <div class="term-wrap">
+      <div class="term">
+        <div class="term-bar">
+          <span><span class="dot"></span>telnet vikingmud.org 2001</span>
+          <span id="term-status">streaming…</span>
+        </div>
+        <div class="term-body" id="term-body"></div>
+        <form class="term-input" id="term-form">
+          <span class="prompt">›</span>
+          <input id="term-input" placeholder="watching…" disabled autocomplete="off" spellcheck="false">
+          <span class="term-enter">↵</span>
+        </form>
+      </div>
+      <p class="mono term-note">
+        Demo realm · the live game has more teeth.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Intro ─────────────────────────────────────────────────────────── -->
+<section id="intro" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01<span>Introduction</span></div>
+      <h2 class="sec-title">A world told entirely in words.</h2>
+    </div>
+    <div class="intro-grid">
+      <div class="col col-18">
+        <p class="lede">
+          A MUD — Multi-User Dungeon — is the ancestor of every online RPG you've
+          ever played. Picture a chat window that is also a forest, a tavern, a
+          dragon's hoard. You type <span class="code">look</span>
+          and the world describes itself back to you.
+        </p>
+        <p class="body">
+          Viking MUD has been running since 1991, originally out of Trondheim,
+          Norway. The world is rooted in Norse mythology and built room-by-room
+          by a small team of volunteer wizards. There are no microtransactions,
+          no battle pass, no AI-generated content. Every description was typed by
+          a human who cared.
+        </p>
+        <p class="body">
+          You can play in any terminal, in your browser, or with a dedicated MUD
+          client. The barrier to entry is low; the depth is not.
+        </p>
+      </div>
+      <div class="col col-24">
+        <div class="stats">
+          <div class="intro-stat">
+            <div class="n">35</div><span class="l">Years online</span>
+          </div>
+          <div class="intro-stat">
+            <div class="n">21</div><span class="l">Active guilds</span>
+          </div>
+          <div class="intro-stat">
+            <div class="n">2.4k</div><span class="l">Rooms charted</span>
+          </div>
+          <div class="intro-stat">
+            <div class="n">∞</div><span class="l">Free to play</span>
+          </div>
+          <div class="intro-stat">
+            <div class="n">0</div><span class="l">Microtransactions</span>
+          </div>
+          <div class="intro-stat">
+            <div class="n" id="live-intro-online">17</div><span class="l">Online right now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── News ──────────────────────────────────────────────────────────── -->
+<section id="news" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02<span>News</span></div>
+      <h2 class="sec-title">Dispatches from the realm.</h2>
+    </div>
+    <div class="news-grid">
+
+      <article class="news-item feature">
+        <div class="row">
+          <span class="news-tag">Year in Review</span>
+          <span class="news-date">31 Dec 2025</span>
+        </div>
+        <h3 class="news-title">A look back at 2025</h3>
+        <p class="news-excerpt">Three new areas opened — the Cliffs of Hraun, the Hidden Forge under Sindri's Hall, and the long-promised expansion of the Mire. The thief guild was rebalanced (sorry, thieves). 14 new wizards earned their staves.</p>
+        <div class="news-foot"><span>01 / 05</span><span class="read">Read →</span></div>
+      </article>
+
+      <article class="news-item">
+        <div class="row">
+          <span class="news-tag">Patch</span>
+          <span class="news-date">19 Mar 2026</span>
+        </div>
+        <h3 class="news-title">Combat tick recalibrated</h3>
+        <p class="news-excerpt">Following a long thread on the boards, weapon speed now ticks against the new fatigue system. Heavy weapons hit harder; spears finally feel like spears.</p>
+        <div class="news-foot"><span>02 / 05</span><span class="read">Read →</span></div>
+      </article>
+
+      <article class="news-item">
+        <div class="row">
+          <span class="news-tag">Area</span>
+          <span class="news-date">04 Mar 2026</span>
+        </div>
+        <h3 class="news-title">The Mire expansion live</h3>
+        <p class="news-excerpt">Forty-eight new rooms south of Bog's End. Bring a torch and an antidote.</p>
+        <div class="news-foot"><span>03 / 05</span><span class="read">Read →</span></div>
+      </article>
+
+      <article class="news-item">
+        <div class="row">
+          <span class="news-tag">Guild</span>
+          <span class="news-date">14 Feb 2026</span>
+        </div>
+        <h3 class="news-title">Skalds open initiation</h3>
+        <p class="news-excerpt">For the first time in seven years, the Skalds are accepting new initiates. Composition test required.</p>
+        <div class="news-foot"><span>04 / 05</span><span class="read">Read →</span></div>
+      </article>
+
+      <article class="news-item">
+        <div class="row">
+          <span class="news-tag">Community</span>
+          <span class="news-date">02 Feb 2026</span>
+        </div>
+        <h3 class="news-title">RC5 team passes 30 trillion blocks</h3>
+        <p class="news-excerpt">Our distributed-computing veterans cross another absurd milestone. Hat tip to everyone still running clients on dusty laptops.</p>
+        <div class="news-foot"><span>05 / 05</span><span class="read">Read →</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Guilds ─────────────────────────────────────────────────────────── -->
+<section id="guilds" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03<span>Guilds</span></div>
+      <h2 class="sec-title">Twenty-one guilds.<br>One world. Choose your saga.</h2>
+    </div>
+    <div class="guild-grid">
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛒ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Combat · Fury</div>
+          <h4>Berserkers</h4>
+          <p>Bloodthirsty barbarians from Branyle who channel unyielding rage into twohanded weapons. They headbutt, cleave, bearhug and sacrifice their victims to mother rock.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚲ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Combat · Neutral</div>
+          <h4>Blue Knights</h4>
+          <p>Warriors of neutrality, fighting both good and evil. Founded by Lord Murky, rebuilt by Lord Ringer — they become what they wear and wield.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛞ</div>
+          <div class="pop"><b>◆</b> Knubo</div>
+          <div class="tag">Social · Party</div>
+          <h4>Drunks</h4>
+          <p>Drunkards stumbling around the mud. Very party focused, gleefully non-traditional.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛖ</div>
+          <div class="pop"><b>◆</b> Knubo</div>
+          <div class="tag">Quest · Travel</div>
+          <h4>Explorers</h4>
+          <p>A merry band, small in number, strong of heart. Combat, wealth and fear of death are not for them — only exploration and the solving of quests.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚠ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Magic · Versatile</div>
+          <h4>Frogs</h4>
+          <p>One of the oldest guilds, and a good place to start. Few combat-spells but a wide spectrum that will aid you in almost any situation.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛁ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Magic · Ice</div>
+          <h4>Frost</h4>
+          <p>No mortal knows the number of the Ice Gods. Only the keepers of the Frost guild speak with them, atop the Frost Mountains in a fortress of ice no mortal dares enter.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛇ</div>
+          <div class="pop"><b>◆</b> Gaeius</div>
+          <div class="tag">Magic · Winter</div>
+          <h4>Frost Druids</h4>
+          <p>Mystics of Trymheim, schooled by the goddess Skathi in the Way of the Beast, the Way of the Hearth, and the Way of Winter — wielding the powers of Niflheim.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚷ</div>
+          <div class="pop"><b>◆</b> Knubo</div>
+          <div class="tag">Craft · Element</div>
+          <h4>Golems</h4>
+          <p>On the remote plains a stooped old man keeps the secret arts. With a bone and the right element, the path to mastering golem creation opens.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚺ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Care · Divine</div>
+          <h4>Healers</h4>
+          <p>Sworn before the Goddess to harm no living being. In return she grants them the knowledge of divine healing — they roam the lands and sustain all life within.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛏ</div>
+          <div class="pop"><b>◆</b> Drake</div>
+          <div class="tag">Combat · Legion</div>
+          <h4>Khartagian Army</h4>
+          <p>Once the finest army in the world, led by fieldmarshall Mago. Karthago fell to Rome while its soldiers fought the Greeks abroad — the army marches still.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛗ</div>
+          <div class="pop"><b>◆</b> Ilumed</div>
+          <div class="tag">Magic · Academy</div>
+          <h4>Krylitz School of Magic</h4>
+          <p>A school of magic of long standing — its halls open to the dedicated student of the arcane.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛚ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Magic · Nature</div>
+          <h4>Lemurians</h4>
+          <p>Strangers from Thaaii brought their magic ages ago. The underground city of Lemuria lies beneath Sealand; find the book of histories there to be initiated.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛜ</div>
+          <div class="pop"><b>◆</b> Azatoth</div>
+          <div class="tag">Trade · Coin</div>
+          <h4>Merchants Guild</h4>
+          <p>A mysterious order settled in Larstown, gathering riches from trade deals and secretive contracts. Anyone who would grow rich by trade should seek them out.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛟ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Spirit · Balance</div>
+          <h4>Monk Guild</h4>
+          <p>High atop a cliff north along the Eastroad stands the Monastery of Mirg. Though Mirg has ascended, he keeps a close watch on his disciples of balance and serenity.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚾ</div>
+          <div class="pop"><b>◆</b> Postkasse</div>
+          <div class="tag">Magic · Death</div>
+          <h4>Necromancers</h4>
+          <p>Those who draw upon the dead for magical power. Feared throughout the universe — only Necromancers and the gods can call the walking dead back from beyond.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚱ</div>
+          <div class="pop"><b>✱</b> Administration</div>
+          <div class="tag">Combat · Defence</div>
+          <h4>Ring of Steel</h4>
+          <p>"Unity Is Power." A defensive guild seated in Dayaleh, holding the line against the hordes of the six circles of Hell. Their offence leaves something to be desired.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚦ</div>
+          <div class="pop"><b>◆</b> Cryzeck</div>
+          <div class="tag">Magic · Rune</div>
+          <h4>Runewalkers</h4>
+          <p>Discovered by seven dwarves digging for treasure. Without runestones a Runewalker is nothing — combine some hundred and fifty runes to craft your own spells.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛈ</div>
+          <div class="pop"><b>◆</b> Administration</div>
+          <div class="tag">Combat · Holy</div>
+          <h4>Paladins</h4>
+          <p>Holy warriors, pure of heart. Those who survive the dreaded Paladin Tests gain the gifts of the good Gods — but a Paladin must never harm a creature of Good.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛊ</div>
+          <div class="pop"><b>◆</b> Brainstorm</div>
+          <div class="tag">Combat · Bushido</div>
+          <h4>Samurai</h4>
+          <p>A constituency of two: his Lord, and his Bushido code. Continual training for excellence is the constant of Samurai life.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᛉ</div>
+          <div class="pop"><b>◆</b> Brainstorm &amp; Cryzeck</div>
+          <div class="tag">Nature · Triple</div>
+          <h4>The Shamans</h4>
+          <p>Great warriors who inherit the long-lost knowledge of the powers of nature, divided into three classes: restoration, elemental, and enhancement.</p>
+        </div>
+      </div>
+
+      <div class="guild">
+        <div>
+          <div class="glyph" aria-hidden="true">ᚹ</div>
+          <div class="pop"><b>✱</b> Administration</div>
+          <div class="tag">Combat · Pure</div>
+          <h4>Warmongers</h4>
+          <p>"Be prepared. An axe and armour help a lot with that." A clan of bloodthirsty warriors who shun magic and forge body and blade into a single weapon of flesh.</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="mono guilds-foot">
+      ✱ converted from IcewindMud · a few further guilds prefer to remain discreet
+    </p>
+  </div>
+</section>
+
+<!-- ── Connect ────────────────────────────────────────────────────────── -->
+<section id="connect" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04<span>Connect</span></div>
+      <h2 class="sec-title">Three keystrokes from now,<br>you are inside.</h2>
+    </div>
+    <div class="connect">
+      <div class="col col-18">
+        <span class="eyebrow">Quickest path</span>
+        <h3 class="h-2">Open a terminal.</h3>
+        <div class="conn-cmd">
+          <span class="conn-cmd-text">$ telnet connect.vikingmud.org 2001</span>
+          <span class="copy" id="copy-btn">Copy</span>
+        </div>
+        <p class="body body-mt">
+          On Windows? Use PuTTY or any modern MUD client. We recommend
+          Mudlet — it's free, scriptable, and handles colour correctly.
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn">Play in browser <span class="arrow">→</span></a>
+          <a href="#" class="btn btn-ghost">Download Mudlet</a>
+        </div>
+      </div>
+      <div class="conn-list">
+        <div class="ln"><span>HOST</span><b>connect.vikingmud.org</b></div>
+        <div class="ln"><span>PORT</span><b>2001</b></div>
+        <div class="ln"><span>TLS PORT</span><b>2002</b></div>
+        <div class="ln"><span>STATUS</span><b class="status-good" id="live-conn-status">● Online · 11 hours</b></div>
+        <div class="ln"><span>PLAYERS</span><b id="live-conn-players">9</b></div>
+        <div class="ln"><span>FIRST BOOT</span><b>11 jul 1991</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Community ──────────────────────────────────────────────────────── -->
+<section id="community" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05<span>Community</span></div>
+      <h2 class="sec-title">A small village,<br>thirty-five years deep.</h2>
+    </div>
+    <div class="links-grid">
+      <a class="link-card" href="#">
+        <div><h5>Wiki</h5><p>Lore, maps, area guides, every spell ever balanced.</p></div>
+        <span class="arr">Browse →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Patreon</h5><p>Keep the lights on. Servers, domains, the occasional sticker run.</p></div>
+        <span class="arr">Support →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Boards</h5><p>The forum where combat balance is debated, eternally.</p></div>
+        <span class="arr">Read →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Contact</h5><p>Bug reports, applications to wiz, politely-worded grievances.</p></div>
+        <span class="arr">Write →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>RC5 Team</h5><p>Our distributed-computing crew has been crunching since 1997.</p></div>
+        <span class="arr">Join →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Year in Review</h5><p>The full administration's summary of 2025 — areas, code, drama.</p></div>
+        <span class="arr">Read →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Terms of Service</h5><p>Short. Reasonable. Honour-system, mostly.</p></div>
+        <span class="arr">View →</span>
+      </a>
+      <a class="link-card" href="#">
+        <div><h5>Privacy</h5><p>We log what we need to keep the world running. Nothing more.</p></div>
+        <span class="arr">View →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001</span>
+    <span>Last update · 31 dec 2025</span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+</body>
+</html>
