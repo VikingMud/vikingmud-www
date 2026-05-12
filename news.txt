@@ -1,0 +1,43 @@
+tag: Year in Review
+date: 2025-12-31
+title: A look back at 2025
+feature: true
+
+Three new areas opened — the Cliffs of Hraun, the Hidden Forge under Sindri's Hall,
+and the long-promised expansion of the Mire. The thief guild was rebalanced (sorry,
+thieves). 14 new wizards earned their staves.
+
+---
+
+tag: Patch
+date: 2026-03-19
+title: Combat tick recalibrated
+
+Following a long thread on the boards, weapon speed now ticks against the new fatigue
+system. Heavy weapons hit harder; spears finally feel like spears.
+
+---
+
+tag: Area
+date: 2026-03-04
+title: The Mire expansion live
+
+Forty-eight new rooms south of Bog's End. Bring a torch and an antidote.
+
+---
+
+tag: Guild
+date: 2026-02-14
+title: Skalds open initiation
+
+For the first time in seven years, the Skalds are accepting new initiates.
+Composition test required.
+
+---
+
+tag: Community
+date: 2026-02-02
+title: RC5 team passes 30 trillion blocks
+
+Our distributed-computing veterans cross another absurd milestone. Hat tip to
+everyone still running clients on dusty laptops.

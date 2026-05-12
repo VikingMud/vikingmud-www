@@ -57,7 +57,7 @@
         <div class="hero-meta">
           <span><b>vikingmud.org</b> · port 2001</span>
           <span id="live-hero-online">17 souls online</span>
-          <span>News · 19 mar 2026</span>
+          <span id="live-news-date">News</span>
         </div>
       </div>
       <div>
@@ -80,17 +80,12 @@
       <div class="term">
         <div class="term-bar">
           <span><span class="dot"></span>telnet vikingmud.org 2001</span>
-          <span id="term-status">streaming…</span>
+          <span id="term-status">demo · looping</span>
         </div>
         <div class="term-body" id="term-body"></div>
-        <form class="term-input" id="term-form">
-          <span class="prompt">›</span>
-          <input id="term-input" placeholder="watching…" disabled autocomplete="off" spellcheck="false">
-          <span class="term-enter">↵</span>
-        </form>
       </div>
       <p class="mono term-note">
-        Demo realm · the live game has more teeth.
+        Real session replay · loops continuously
       </p>
     </div>
   </div>
@@ -114,9 +109,8 @@
         <p class="body">
           Viking MUD has been running since 1991, originally out of Trondheim,
           Norway. The world is rooted in Norse mythology and built room-by-room
-          by a small team of volunteer wizards. There are no microtransactions,
-          no battle pass, no AI-generated content. Every description was typed by
-          a human who cared.
+          over decades by volunteer wizards. There are no microtransactions,
+          no battle pass. Created by 140+ wizards and administartion that care.
         </p>
         <p class="body">
           You can play in any terminal, in your browser, or with a dedicated MUD
@@ -132,7 +126,7 @@
             <div class="n">21</div><span class="l">Active guilds</span>
           </div>
           <div class="intro-stat">
-            <div class="n">2.4k</div><span class="l">Rooms charted</span>
+            <div class="n">60k</div><span class="l">Rooms charted</span>
           </div>
           <div class="intro-stat">
             <div class="n">∞</div><span class="l">Free to play</span>
@@ -156,59 +150,7 @@
       <div class="sec-num">02<span>News</span></div>
       <h2 class="sec-title">Dispatches from the realm.</h2>
     </div>
-    <div class="news-grid">
-
-      <article class="news-item feature">
-        <div class="row">
-          <span class="news-tag">Year in Review</span>
-          <span class="news-date">31 Dec 2025</span>
-        </div>
-        <h3 class="news-title">A look back at 2025</h3>
-        <p class="news-excerpt">Three new areas opened — the Cliffs of Hraun, the Hidden Forge under Sindri's Hall, and the long-promised expansion of the Mire. The thief guild was rebalanced (sorry, thieves). 14 new wizards earned their staves.</p>
-        <div class="news-foot"><span>01 / 05</span><span class="read">Read →</span></div>
-      </article>
-
-      <article class="news-item">
-        <div class="row">
-          <span class="news-tag">Patch</span>
-          <span class="news-date">19 Mar 2026</span>
-        </div>
-        <h3 class="news-title">Combat tick recalibrated</h3>
-        <p class="news-excerpt">Following a long thread on the boards, weapon speed now ticks against the new fatigue system. Heavy weapons hit harder; spears finally feel like spears.</p>
-        <div class="news-foot"><span>02 / 05</span><span class="read">Read →</span></div>
-      </article>
-
-      <article class="news-item">
-        <div class="row">
-          <span class="news-tag">Area</span>
-          <span class="news-date">04 Mar 2026</span>
-        </div>
-        <h3 class="news-title">The Mire expansion live</h3>
-        <p class="news-excerpt">Forty-eight new rooms south of Bog's End. Bring a torch and an antidote.</p>
-        <div class="news-foot"><span>03 / 05</span><span class="read">Read →</span></div>
-      </article>
-
-      <article class="news-item">
-        <div class="row">
-          <span class="news-tag">Guild</span>
-          <span class="news-date">14 Feb 2026</span>
-        </div>
-        <h3 class="news-title">Skalds open initiation</h3>
-        <p class="news-excerpt">For the first time in seven years, the Skalds are accepting new initiates. Composition test required.</p>
-        <div class="news-foot"><span>04 / 05</span><span class="read">Read →</span></div>
-      </article>
-
-      <article class="news-item">
-        <div class="row">
-          <span class="news-tag">Community</span>
-          <span class="news-date">02 Feb 2026</span>
-        </div>
-        <h3 class="news-title">RC5 team passes 30 trillion blocks</h3>
-        <p class="news-excerpt">Our distributed-computing veterans cross another absurd milestone. Hat tip to everyone still running clients on dusty laptops.</p>
-        <div class="news-foot"><span>05 / 05</span><span class="read">Read →</span></div>
-      </article>
-
-    </div>
+    <div class="news-grid" id="news-grid"></div>
   </div>
 </section>
 
@@ -467,6 +409,7 @@
         <div class="ln"><span>PORT</span><b>2001</b></div>
         <div class="ln"><span>TLS PORT</span><b>2002</b></div>
         <div class="ln"><span>STATUS</span><b class="status-good" id="live-conn-status">● Online · 11 hours</b></div>
+        <div class="ln"><span>REBOOT</span><b class="status-good" id="live-conn-status">● Autoreboots after 1 day and 18 hours</b></div>
         <div class="ln"><span>PLAYERS</span><b id="live-conn-players">9</b></div>
         <div class="ln"><span>FIRST BOOT</span><b>11 jul 1991</b></div>
       </div>

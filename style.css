@@ -214,11 +214,14 @@ html[data-theme="terminal"] .ygg-img{
   color:var(--term-dim);letter-spacing:.14em;text-transform:uppercase;position:relative;z-index:1}
 .term-bar .dot{width:8px;height:8px;border-radius:50%;background:var(--term-dim);display:inline-block;margin-right:6px}
 .term-body{padding:18px 18px 14px;font-size:13px;line-height:1.55;
-  min-height:280px;white-space:pre-wrap;word-break:break-word;position:relative;z-index:1;
-  overflow-y:auto;max-height:420px}
+  height:420px;white-space:pre-wrap;word-break:break-word;position:relative;z-index:1;
+  overflow-y:auto}
 .term-body .room{color:var(--term-fg);font-weight:500}
 .term-body .desc{color:var(--term-dim)}
-.term-body .exits{color:color-mix(in oklab, var(--term-fg) 80%, var(--ink))}
+.term-body .exits{color:#82c47c}
+.term-body .mud-prompt{color:#c878c8;font-weight:500}
+.demo-end{color:var(--accent);text-align:center;padding:18px 0 8px;
+  letter-spacing:.18em;font-size:12px;text-transform:uppercase;font-family:var(--mono)}
 .term-body .you{color:var(--term-cursor)}
 .term-body .sys{color:var(--accent)}
 .term-input{display:flex;gap:8px;align-items:center;padding:12px 14px;
