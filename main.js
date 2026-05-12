@@ -149,7 +149,7 @@ function playDemo() {
   });
 }
 
-playDemo();
+if (termBody) playDemo();
 
 // ── News loader ───────────────────────────────────────────────────────────────
 
@@ -221,6 +221,7 @@ async function refreshLive() {
     set('live-hero-online',  `${usercount} souls online`);
     set('live-intro-online', usercount);
     set('live-conn-status',  `● Online · ${brief}`);
+    set('live-conn-reboot',  `● Autoreboots after ${brief}`);
     set('live-conn-players', usercount);
   } catch (_) {}
 }
@@ -230,7 +231,7 @@ setInterval(refreshLive, 60_000);
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-document.getElementById('copy-btn').addEventListener('click', () => {
+document.getElementById('copy-btn')?.addEventListener('click', () => {
   const btn = document.getElementById('copy-btn');
   navigator.clipboard?.writeText('telnet vikingmud.org 2001');
   btn.textContent = 'Copied ✓';

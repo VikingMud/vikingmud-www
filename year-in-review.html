@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Year in Review 2025</title>
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="guide-header">
+  <div class="wrap guide-wrap">
+    <span class="eyebrow">Administration's report</span>
+    <h1 class="h-1">Year in Review<br>2025</h1>
+    <p class="lede">
+      Wherein the administration recounts the events of 2025 — what shipped,
+      what broke, who returned, and what comes next.
+    </p>
+  </div>
+</div>
+
+<!-- ── By the numbers ────────────────────────────────────────────────── -->
+<div class="rc5-statbar">
+  <div class="wrap">
+    <div class="rc5-stats">
+      <div class="rc5-stat">
+        <span class="rc5-n">8</span>
+        <span class="rc5-l">New areas released</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">216</span>
+        <span class="rc5-l">Mudlib improvements</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">459</span>
+        <span class="rc5-l">Bugs fixed</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">78</span>
+        <span class="rc5-l">New player characters</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Major events ───────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Major events and changes</h2>
+    <ul>
+      <li>
+        Drake developed a new FTP daemon that integrates with in-MUD access
+        controls and adds FTPS support for encrypted file transfers.
+      </li>
+      <li>
+        8 new areas and projects passed Quality Control and were released to players.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Other changes ─────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Other changes</h2>
+    <ul>
+      <li>Documentation improved for both mortals and wizards.</li>
+      <li>216 changes and improvements made to the core mudlib.</li>
+      <li>459 bugs fixed in existing areas.</li>
+      <li>78 new player characters registered.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Administration ────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Administration</h2>
+    <ul>
+      <li>Okjuna has returned to QC.</li>
+    </ul>
+    <p>
+      For the current staff list see the
+      <a href="index.html#admin" style="color:var(--accent)">administration section</a>
+      on the main page.
+    </p>
+  </div>
+</section>
+
+<!-- ── Looking ahead ─────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Looking ahead to 2026</h2>
+    <p>Planned work — most of it under the hood, some visible to players:</p>
+    <ul>
+      <li>The server will move to a new physical location.</li>
+      <li>Upgrade the driver to the current version (1.7.8 at time of writing).</li>
+      <li>Complete the move to vanilla DGD, with Viking MUD adaptations as a separate module — streamlining future upgrades.</li>
+      <li>Upgrade password hashing to Argon2id for improved security. This will require all characters to change their passwords.</li>
+      <li>Implement FTPS support, and TLS for regular MUD connections.</li>
+      <li>Make wizard manual files and regular help files available on the website.</li>
+      <li>Release more areas and features, and continue expanding the world.</li>
+      <li>Continue bugfixing.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+</main>
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001</span>
+    <span><a href="index.html" style="color:inherit">← Back to main page</a></span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+</body>
+</html>

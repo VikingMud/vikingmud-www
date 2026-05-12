@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — RC5 Team</title>
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="guide-header">
+  <div class="wrap guide-wrap">
+    <span class="eyebrow">Distributed computing</span>
+    <h1 class="h-1">RC5 Team</h1>
+    <p class="lede">
+      Since April 1999, Viking MUD has run a team on
+      <a href="https://www.distributed.net" target="_blank" rel="noopener" style="color:var(--accent)">distributed.net</a>,
+      cracking RC5-72 keyblocks on spare CPU cycles around the world.
+      Twenty-six years later, the clients are still running.
+    </p>
+  </div>
+</div>
+
+<!-- ── Stats bar ─────────────────────────────────────────────────────── -->
+<div class="rc5-statbar">
+  <div class="wrap">
+    <div class="rc5-stats">
+      <div class="rc5-stat">
+        <span class="rc5-n">1999</span>
+        <span class="rc5-l">Year founded</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">13165</span>
+        <span class="rc5-l">Team ID</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">30T+</span>
+        <span class="rc5-l">Blocks submitted</span>
+      </div>
+      <div class="rc5-stat">
+        <span class="rc5-n">RC5-72</span>
+        <span class="rc5-l">Current contest</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── The project ───────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2 id="project">The Project</h2>
+    <p>
+      The Bovine RC5-72 Project is run by
+      <a href="https://www.distributed.net" target="_blank" rel="noopener" style="color:var(--accent)">distributed.net</a>
+      and tackles contests associated with RSA Data Security's
+      <a href="https://en.wikipedia.org/wiki/RSA_Secret-Key_Challenge" target="_blank" rel="noopener" style="color:var(--accent)">Secret Key Challenge</a>.
+      The idea is simple: a 72-bit RC5 key is too large for any single computer
+      to brute-force in a reasonable time, but split across thousands of
+      volunteers running a small background client, the keyspace shrinks fast.
+    </p>
+    <p>
+      Viking MUD joined in April 1999 and has been contributing blocks ever
+      since. The client runs quietly in the background, using otherwise idle
+      CPU time, and reports results back to distributed.net's servers.
+    </p>
+  </div>
+</section>
+
+<!-- ── The prize ─────────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2 id="prize">The Prize</h2>
+    <p>
+      RSA Labs offered a USD 10 000 prize to the first person, group, or
+      organization to find the correct RC5-72 key. Because participants
+      submit through distributed.net, distributed.net becomes the winning
+      entity and distributes the money as follows:
+    </p>
+    <div class="rc5-prize-table">
+      <div class="rc5-prize-row">
+        <span>Free Software Foundation <span class="rc5-note">(or highest-voted non-profit)</span></span>
+        <b>USD 6 000</b>
+      </div>
+      <div class="rc5-prize-row">
+        <span>The individual who finds the key</span>
+        <b>USD 1 000</b>
+      </div>
+      <div class="rc5-prize-row">
+        <span>That individual's team <span class="rc5-note">(Viking MUD, in our case)</span></span>
+        <b>USD 1 000</b>
+      </div>
+      <div class="rc5-prize-row">
+        <span>distributed.net</span>
+        <b>USD 2 000</b>
+      </div>
+    </div>
+    <p>
+      If a Viking MUD team member finds the winning key, the team's
+      share goes to the MUD as a whole — server upgrades and the like —
+      not to any individual.
+    </p>
+  </div>
+</section>
+
+<!-- ── How to join ───────────────────────────────────────────────────── -->
+<section class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2 id="howto">How to Join</h2>
+    <ol class="rc5-steps">
+      <li>
+        <strong>Download the client</strong> for your platform from
+        <a href="https://www.distributed.net/download/clients.html" target="_blank" rel="noopener" style="color:var(--accent)">distributed.net/download</a>.
+        It runs on Linux, Windows, macOS, and several others.
+      </li>
+      <li>
+        <strong>Configure the client</strong> following the documentation
+        bundled with the download.
+      </li>
+      <li>
+        <strong>Set the e-mail address</strong> to
+        <span class="cmd-inline">rc5@vikingmud.org</span> when prompted for
+        the sender address for RC5 packages. This assigns your blocks to the
+        Viking MUD team.
+        <p class="rc5-aside">
+          Note: using this address forfeits the individual USD 1 000 finder's
+          share to Viking MUD, raising the team's potential winnings to
+          USD 2 000. If you want to keep your individual share, register your
+          own distributed.net account and join team 13165 manually.
+        </p>
+      </li>
+      <li>
+        <strong>Start the client.</strong> It will run in the background,
+        fetching keyblocks, testing them, and submitting results to
+        distributed.net automatically.
+      </li>
+      <li>
+        <strong>Check the stats</strong> whenever you like.
+      </li>
+    </ol>
+    <a href="https://stats.distributed.net/team/tmember.php?project_id=8&team=13165"
+       target="_blank" rel="noopener" class="btn" style="margin-top:8px">
+      Team stats on distributed.net <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+</main>
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001</span>
+    <span><a href="index.html" style="color:inherit">← Back to main page</a></span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+</body>
+</html>

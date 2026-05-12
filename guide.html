@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Newbie Guide</title>
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="guide-header">
+  <div class="wrap guide-wrap">
+    <span class="eyebrow">Newbie Guide</span>
+    <h1 class="h-1">Your first steps<br>in the realm.</h1>
+    <p class="lede">
+      Everything you need to go from a freshly typed name to a battle-hardened
+      adventurer. Written for players new to Viking MUD — or to MUDs entirely.
+    </p>
+  </div>
+</div>
+
+<!-- ── Table of contents ─────────────────────────────────────────────── -->
+<nav class="guide-toc" aria-label="Contents">
+  <div class="wrap">
+    <ol>
+      <li><a href="#creating">Creating your character</a></li>
+      <li><a href="#stats">Stats, XP and levels</a></li>
+      <li><a href="#combat">Combat</a></li>
+      <li><a href="#quests">Quests</a></li>
+      <li><a href="#communication">Communication</a></li>
+      <li><a href="#tips">Commands &amp; tips</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ── 1. Creating your character ────────────────────────────────────── -->
+<section id="creating" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Creating your character</h2>
+    <p>
+      Connect to <span class="cmd-inline">connect.vikingmud.org</span> on port <span class="cmd-inline">2001</span>.
+      You will be greeted by the Viking MUD banner and asked for a name.
+    </p>
+    <p>
+      Type any name you like. If the server responds with <span class="cmd-inline">New player.</span>
+      the name is free — follow the prompts to set a password and you're in.
+      If it asks for a password without showing "New player.", someone else
+      owns that name; disconnect and try again with a different one.
+      If the name is listed as unavailable, it was either retired for rule
+      violations or is used by an in-game monster.
+    </p>
+    <p>
+      If you have problems creating a character, mail
+      <span class="cmd-inline">help@vikingmud.org</span>.
+    </p>
+    <h3>Your very first command</h3>
+    <p>
+      Once you are in the world, type this before anything else:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>help rules</span>
+    </div>
+    <p>
+      Then head <span class="cmd-inline">north</span> to enter the Academy and
+      start exploring. A few other commands to learn immediately:
+    </p>
+    <ul>
+      <li><span class="cmd-inline">look</span> — describe the current room</li>
+      <li><span class="cmd-inline">who</span> — list players currently online</li>
+      <li><span class="cmd-inline">score</span> (or <span class="cmd-inline">sc</span>) — show your stats and HP</li>
+      <li><span class="cmd-inline">help &lt;topic&gt;</span> — in-game help on any command</li>
+      <li><span class="cmd-inline">apropos &lt;keyword&gt;</span> — find commands by keyword</li>
+      <li><span class="cmd-inline">quit</span> — log out</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 2. Stats, XP and levels ───────────────────────────────────────── -->
+<section id="stats" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Stats, XP and levels</h2>
+    <p>
+      You start as a level 1 mortal with four stats, each set to 1.
+      Everything about your character — how hard you hit, how much damage
+      you can take, how many spells you can cast — flows from these numbers.
+    </p>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <b>STR</b>
+        <span>Strength — carrying capacity and melee damage</span>
+      </div>
+      <div class="stat-card">
+        <b>DEX</b>
+        <span>Dexterity — your chance to hit opponents in combat</span>
+      </div>
+      <div class="stat-card">
+        <b>INT</b>
+        <span>Intelligence — your spell point pool (SP)</span>
+      </div>
+      <div class="stat-card">
+        <b>CON</b>
+        <span>Constitution — your hit point pool (HP); starts at 50, +8 per CON</span>
+      </div>
+    </div>
+    <h3>Gaining experience</h3>
+    <p>
+      Experience (XP) comes from two sources: killing monsters and solving
+      quests. Type <span class="cmd-inline">score</span> at any time to see your
+      current XP total.
+    </p>
+    <h3>Spending experience — the Adventurers Guild</h3>
+    <p>
+      Raw XP does nothing until you spend it. Head to the Adventurers Guild
+      in Larstown and type <span class="cmd-inline">cost</span> to see what
+      you can afford. To raise a stat:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>advance dex</span>
+      <span><span class="prompt">&gt; </span>score</span>
+    </div>
+    <p>
+      You cannot have a higher average stat than your current level.
+      Once your stats are capped for your level, type
+      <span class="cmd-inline">advance leve</span> to go up a level.
+    </p>
+    <h3>Reaching level 20</h3>
+    <p>
+      At level 20 you choose: become a <strong>Wizard</strong> (and help build
+      the world) or an <strong>Eternal</strong> (keep playing as a mortal
+      without the level cap). You will need a certain number of quest points
+      to reach level 20 — more on that below.
+    </p>
+  </div>
+</section>
+
+<!-- ── 3. Combat ─────────────────────────────────────────────────────── -->
+<section id="combat" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Combat</h2>
+    <p>
+      To attack a monster you must be in the same room. Type
+      <span class="cmd-inline">kill &lt;name&gt;</span> to begin a fight.
+      Before charging in, examine your target:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>exa rabbit</span>
+      <span><span class="prompt">&gt; </span>shape rabbit</span>
+    </div>
+    <p>
+      <span class="cmd-inline">exa</span> shows what the monster carries.
+      <span class="cmd-inline">shape</span> gives a sense of its relative
+      toughness during combat. If it looks too dangerous, don't pick the fight.
+    </p>
+    <h3>Weapons and armour</h3>
+    <p>
+      Unarmed combat is possible but poor. Pick up weapons and
+      <em>wield</em> them — a weapon in your pack does nothing.
+      The same goes for armour: <em>wear</em> it or it won't protect you.
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>get knife</span>
+      <span><span class="prompt">&gt; </span>wield knife</span>
+      <span><span class="prompt">&gt; </span>get leather jacket</span>
+      <span><span class="prompt">&gt; </span>wear leather jacket</span>
+      <span><span class="prompt">&gt; </span>eq</span>
+    </div>
+    <p>
+      <span class="cmd-inline">eq</span> lists which body parts are
+      protected and the condition of each piece of armour.
+    </p>
+    <h3>Hit points and healing</h3>
+    <p>
+      Your HP drops when you take damage. If it hits 0, you die.
+      Set <span class="cmd-inline">wimpy 20</span> to auto-flee below 20 % HP —
+      useful until you know what you're doing (though fleeing reduces kill XP).
+    </p>
+    <p>Healing options, cheapest to fastest:</p>
+    <ol>
+      <li>Wait — slow, but free</li>
+      <li>Eat food and drink — the Newbieville Inn sells both</li>
+      <li>Find a Healer — the Healers Guild can restore you for a fee</li>
+    </ol>
+    <h3>Looting and selling</h3>
+    <p>
+      Monsters drop corpses. Loot them with
+      <span class="cmd-inline">get all from corpse</span>.
+      Sell surplus gear at the shop in Larstown, and deposit coins at the bank
+      there so you don't lose them if you die.
+    </p>
+  </div>
+</section>
+
+<!-- ── 4. Quests ─────────────────────────────────────────────────────── -->
+<section id="quests" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Quests</h2>
+    <p>
+      Quests are puzzles built into the world — they earn you XP and quest
+      points, which you need to advance levels and eventually reach Eternal or
+      Wizard status.
+    </p>
+    <h3>Finding quests</h3>
+    <p>
+      Go to the Adventurers Guild and type <span class="cmd-inline">quests</span>.
+      Use <span class="cmd-inline">quests unsolved</span> to filter to what
+      you haven't done yet, and <span class="cmd-inline">quest #</span>
+      (replace # with the number) to get a hint.
+      The lower the quest number, the easier it tends to be.
+    </p>
+    <h3>How to approach them</h3>
+    <p>
+      Examine everything. Listen to NPCs — they usually tell you exactly what
+      they need. Think about what you would do if the situation were real.
+      Common puzzle patterns:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>open drawer</span>
+      <span><span class="prompt">&gt; </span>move carpet</span>
+      <span><span class="prompt">&gt; </span>unlock door with key</span>
+      <span><span class="prompt">&gt; </span>search trash</span>
+    </div>
+    <p>
+      If you solve a quest you will see a message like
+      <em>"You have solved the quest. You feel more experienced."</em>
+      Confirm with <span class="cmd-inline">quests solved</span>.
+    </p>
+    <h3>Scope</h3>
+    <p>
+      Some quests take five minutes; the largest take hours and may require
+      other players. Don't attempt the high-numbered ones as a fresh character.
+      There are also hidden quests not on the list — they have their own
+      rewards.
+    </p>
+  </div>
+</section>
+
+<!-- ── 5. Communication ───────────────────────────────────────────────── -->
+<section id="communication" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Communication</h2>
+    <p>
+      Viking MUD is a social game. Communicating with other players costs no
+      spell points. Here are the main channels:
+    </p>
+    <h3>In-room speech</h3>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>say Hello!</span>
+      <span class="prompt">You say: Hello!</span>
+    </div>
+    <h3>Private messages</h3>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>tell Jada I found the key!</span>
+      <span class="prompt">You tell Jada: I found the key!</span>
+    </div>
+    <p>
+      You don't need to be in the same room.
+      Use <span class="cmd-inline">re &lt;message&gt;</span> to reply to the
+      last person who told you something, and
+      <span class="cmd-inline">last</span> to recall who that was.
+    </p>
+    <h3>World-wide shout</h3>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>shout Anyone want to party?</span>
+    </div>
+    <h3>Chat channels</h3>
+    <p>
+      Channels reach specific groups. Type
+      <span class="cmd-inline">view channels</span> to list them. The most used
+      is <em>Chat</em>:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>chat Dragon down, two to go!</span>
+      <span><span class="prompt">&gt; </span>turn off chat</span>
+      <span><span class="prompt">&gt; </span>turn on trade</span>
+    </div>
+    <h3>Feelings and emotes</h3>
+    <p>
+      Type <span class="cmd-inline">feelings</span> for a full list of
+      pre-built expressions. You can direct them at players and modify them
+      with abbreviated adverbs (type <span class="cmd-inline">adverbs</span>
+      for the list):
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>smile</span>
+      <span class="prompt">You smile happily.</span>
+      <span><span class="prompt">&gt; </span>smile eag Jada</span>
+      <span class="prompt">You smile eagerly at Jada.</span>
+      <span><span class="prompt">&gt; </span>emote draws a map in the dirt.</span>
+      <span class="prompt">Yourname draws a map in the dirt.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. Commands & tips ─────────────────────────────────────────────── -->
+<section id="tips" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Commands &amp; tips</h2>
+    <h3>Aliases — shorthand for long commands</h3>
+    <p>
+      If you repeat the same command constantly, give it a short alias:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>alias gac get all from corpse</span>
+      <span><span class="prompt">&gt; </span>gac</span>
+      <span class="prompt">You get everything from the corpse.</span>
+      <span><span class="prompt">&gt; </span>unalias gac</span>
+      <span><span class="prompt">&gt; </span>alias -c    (clears all aliases)</span>
+    </div>
+    <h3>Custom prompt</h3>
+    <p>
+      Replace the default <span class="cmd-inline">&gt;</span> with something
+      that shows your current HP, SP and XP at a glance:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>prompt #H-#S-#X:</span>
+      <span class="prompt">78-128-14302:</span>
+    </div>
+    <p>Type <span class="cmd-inline">help prompt</span> for the full list of tokens.</p>
+    <h3>Colour support</h3>
+    <p>
+      If your client supports ANSI colour, enable it and assign styles to
+      message types so tells stand out from room descriptions:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>screen term ansi</span>
+      <span><span class="prompt">&gt; </span>colour tells bold</span>
+    </div>
+    <h3>Splitting loot</h3>
+    <p>
+      When partying, split gold equally among everyone present:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>split 2500</span>
+    </div>
+    <h3>Reporting bugs and ideas</h3>
+    <p>
+      If you find a bug, typo, or have a suggestion, use the in-game commands
+      from wherever you are. The creators read these:
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>bug I cannot go east from here</span>
+      <span><span class="prompt">&gt; </span>idea Add a torch somewhere near the entrance</span>
+      <span><span class="prompt">&gt; </span>typo "recieve" should be "receive" on the sign</span>
+    </div>
+    <h3>Useful miscellany</h3>
+    <ul>
+      <li><span class="cmd-inline">finger &lt;name&gt;</span> — see info about another player</li>
+      <li><span class="cmd-inline">plan</span> — write a profile line others can read</li>
+      <li><span class="cmd-inline">creator</span> — find out who built the area you're in</li>
+      <li><span class="cmd-inline">verbs</span> — list every command available to you</li>
+      <li><span class="cmd-inline">bn</span> — open the board system (in-game forums)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+</main>
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001</span>
+    <span><a href="index.html" style="color:inherit">← Back to main page</a></span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+</body>
+</html>
