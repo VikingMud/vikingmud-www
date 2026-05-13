@@ -1,3 +1,13 @@
+tag: Game updates
+date: 2026-05-12
+title: TLS support
+author: Knubo
+
+We now support TLS secure connection to Viking Mud. 
+Please use it on port 2002 to connect if your client supports this.
+
+---
+
 tag: Maintenance
 date: 2026-03-19
 title: Virtualization platform upgrade
