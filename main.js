@@ -133,23 +133,36 @@ function buildSteps() {
   typeCmd(150, 1800, 4, 'wield knife');
   after(400,  () => addLine('sys',  'You now wield knife in right hand.'));
 
-  // End message, then restart
+  // End message, then show play button again
   after(1600, () => addEndMsg());
-  after(3200, () => playDemo());
+  after(3200, () => showDemoButton());
 
   return steps;
+}
+
+function showDemoButton() {
+  const btn = document.getElementById('demo-play-btn');
+  if (btn) btn.hidden = false;
+  const status = document.getElementById('term-status');
+  if (status) status.textContent = 'idle';
 }
 
 function playDemo() {
   demoTimers.forEach(id => clearTimeout(id));
   demoTimers = [];
   termBody.innerHTML = '';
+  const status = document.getElementById('term-status');
+  if (status) status.textContent = 'demo · playing';
   buildSteps().forEach(({ at, fn }) => {
     demoTimers.push(setTimeout(fn, at));
   });
 }
 
-if (termBody) playDemo();
+document.getElementById('demo-play-btn')?.addEventListener('click', () => {
+  const btn = document.getElementById('demo-play-btn');
+  if (btn) btn.hidden = true;
+  playDemo();
+});
 
 // ── News loader ───────────────────────────────────────────────────────────────
 

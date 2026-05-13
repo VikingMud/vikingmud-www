@@ -94,6 +94,10 @@ body{overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer}
 
+/* ── Screen-reader only ─────────────────────────────────────────────── */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 /* ── Skip link ──────────────────────────────────────────────────────── */
 .skip-link{
   position:absolute;left:-9999px;top:0;z-index:999;
@@ -371,6 +375,19 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
 .lede-mt{margin-top:8px}
 .sec-demo{padding-top:0;padding-bottom:var(--gap)}
 .term-wrap{max-width:920px;margin:0 auto}
+.demo-stage{position:relative}
+.demo-play-btn[hidden]{display:none}
+.demo-play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:10;display:inline-flex;align-items:center;gap:12px;
+  padding:16px 32px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--term-bg);border:1px solid var(--term-fg);color:var(--term-fg);
+  cursor:pointer;transition:background .2s ease,color .2s ease;
+  box-shadow:0 0 40px color-mix(in oklab,var(--accent) 20%,transparent);
+}
+.demo-play-btn:hover{background:var(--term-fg);color:var(--term-bg)}
+.demo-play-btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .term-enter{color:var(--term-dim);font-size:11px;letter-spacing:.14em}
 .term-note{text-align:center;margin-top:14px}
 .news-item .row{justify-content:space-between}

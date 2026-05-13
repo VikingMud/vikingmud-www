@@ -4,7 +4,19 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Viking MUD — Home</title>
-
+<meta name="description" content="Viking MUD — a free, text-based multi-user roleplaying game running since 1991. Connect via telnet or a MUD client and explore a living Norse world shaped by 35 years of volunteer wizards.">
+<meta name="author" content="Viking MUD Administration">
+<link rel="canonical" href="https://www.vikingmud.org/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Viking MUD">
+<meta property="og:url" content="https://www.vikingmud.org/">
+<meta property="og:title" content="Viking MUD — A text-realm since 1991">
+<meta property="og:description" content="Free, text-based multi-user roleplaying game running since 1991. Connect via telnet and explore a living Norse world.">
+<meta property="og:image" content="https://www.vikingmud.org/yggdrasil.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viking MUD — A text-realm since 1991">
+<meta name="twitter:description" content="Free, text-based multi-user roleplaying game running since 1991. Connect via telnet and explore a living Norse world.">
+<meta name="twitter:image" content="https://www.vikingmud.org/yggdrasil.png">
 <link rel="icon" href="yggdrasil.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -80,16 +92,27 @@
       <div class="sec-num">00<span>Live demo</span></div>
       <h2 class="sec-title">Take a turn,<br>see what happens.</h2>
     </div>
-    <div class="term-wrap" aria-hidden="true">
-      <div class="term">
-        <div class="term-bar">
-          <span><span class="dot"></span>telnet vikingmud.org 2001</span>
-          <span id="term-status">demo · looping</span>
+    <div class="term-wrap">
+      <p id="demo-sr-hint" class="sr-only">
+        Decorative terminal demo showing a simulated Viking MUD login session.
+        Once started, it generates rapid scrolling text that is not screen-reader
+        friendly. The content is purely visual — everything shown is also
+        described in the guide.
+      </p>
+      <div class="demo-stage">
+        <button id="demo-play-btn" class="demo-play-btn" aria-describedby="demo-sr-hint">
+          <span aria-hidden="true">▶</span> Play demo
+        </button>
+        <div class="term" aria-hidden="true">
+          <div class="term-bar">
+            <span><span class="dot"></span>telnet vikingmud.org 2001</span>
+            <span id="term-status">idle</span>
+          </div>
+          <div class="term-body" id="term-body"></div>
         </div>
-        <div class="term-body" id="term-body"></div>
       </div>
-      <p class="mono term-note">
-        Real session replay · loops continuously
+      <p class="mono term-note" aria-hidden="true">
+        Real session replay · click play to start
       </p>
     </div>
   </div>
@@ -118,8 +141,8 @@
           no battle pass. Created by 140+ wizards and administration that care.
         </p>
         <p class="body">
-          You can play in any terminal, in your browser, or with a dedicated MUD
-          client. The barrier to entry is low; the depth is not.
+          You can play in any terminal or with a dedicated MUD client.
+          The barrier to entry is low; the depth is not.
         </p>
       </div>
       <div class="col col-24">
@@ -405,8 +428,7 @@
           Mudlet — it's free, scriptable, and handles colour correctly.
         </p>
         <div class="hero-cta">
-          <a href="#" class="btn">Play in browser <span class="arrow" aria-hidden="true">→</span></a>
-          <a href="#" class="btn btn-ghost">Download Mudlet</a>
+          <a href="https://www.mudlet.org/" class="btn btn-ghost" target="_blank" rel="noopener">Download Mudlet <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="conn-list">
@@ -422,7 +444,7 @@
     <div class="connect-newbie">
       <span class="eyebrow">First time?</span>
       <ol class="newbie-steps">
-        <li>Connect using the command above — or click <strong>Play in browser</strong></li>
+        <li>Connect using the command above, or download <a href="https://www.mudlet.org/" target="_blank" rel="noopener" style="color:var(--accent)">Mudlet</a> for a richer experience</li>
         <li>Type any name at the prompt. If you see <span class="code">New player.</span> enter a password to claim it</li>
         <li>Type <span class="code">help rules</span> to orient yourself, then <span class="code">north</span> to enter the world</li>
       </ol>
