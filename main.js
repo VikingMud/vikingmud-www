@@ -185,6 +185,7 @@ function renderNews(items) {
         <span class="news-date">${fmtDate(item.date)}</span>
       </div>
       <h3 class="news-title">${item.title}</h3>
+      ${item.author ? `<span class="news-author">${item.author}</span>` : ''}
       <p class="news-excerpt">${item.excerpt}</p>
       <div class="news-foot"><span>${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}</span></div>
     </article>`).join('');

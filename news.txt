@@ -1,43 +1,47 @@
-tag: Year in Review
-date: 2025-12-31
-title: A look back at 2025
-feature: true
-
-Three new areas opened — the Cliffs of Hraun, the Hidden Forge under Sindri's Hall,
-and the long-promised expansion of the Mire. The thief guild was rebalanced (sorry,
-thieves). 14 new wizards earned their staves.
-
----
-
-tag: Patch
+tag: Maintenance
 date: 2026-03-19
-title: Combat tick recalibrated
+title: Virtualization platform upgrade
+author: Dios
 
-Following a long thread on the boards, weapon speed now ticks against the new fatigue
-system. Heavy weapons hit harder; spears finally feel like spears.
-
----
-
-tag: Area
-date: 2026-03-04
-title: The Mire expansion live
-
-Forty-eight new rooms south of Bog's End. Bring a torch and an antidote.
+Upgrading the underlying virtualization platform. Please allow for 20+ minutes
+of downtime — will try to be quicker. MUD was back up at 11:22 UTC.
 
 ---
 
-tag: Guild
-date: 2026-02-14
-title: Skalds open initiation
+tag: Maintenance
+date: 2026-03-12
+title: Server software updates
+author: Dios
 
-For the first time in seven years, the Skalds are accepting new initiates.
-Composition test required.
+About 10-15 minutes of downtime for server software updates.
+MUD was back up at 08:12 UTC.
 
 ---
 
-tag: Community
-date: 2026-02-02
-title: RC5 team passes 30 trillion blocks
+tag: Maintenance
+date: 2025-11-11
+title: Server software updates
+author: Dios
 
-Our distributed-computing veterans cross another absurd milestone. Hat tip to
-everyone still running clients on dusty laptops.
+About 5-15 minutes of downtime for server software updates.
+MUD was back up at 07:43 UTC.
+
+---
+
+tag: Maintenance
+date: 2025-09-22
+title: Server software updates
+author: Dios
+
+About 5-15 minutes of downtime for server software updates. Downtime lasted
+longer than anticipated due to work intruding. Sorry about that!
+
+---
+
+tag: Maintenance
+date: 2025-07-29
+title: Server software updates
+author: Dios
+
+About 5-15 minutes of downtime for server software updates.
+MUD was back up at 07:03 UTC.

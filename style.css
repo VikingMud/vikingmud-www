@@ -289,6 +289,8 @@ section{padding:var(--gap) 0;position:relative}
 .news-title{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.15;
   color:var(--ink);text-transform:uppercase;letter-spacing:.02em;margin:0}
 .news-item.feature .news-title{font-size:36px}
+.news-author{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  color:var(--ink-3);text-transform:uppercase}
 .news-excerpt{color:var(--ink-2);line-height:1.55;font-size:14.5px;margin:0}
 .news-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-3);
