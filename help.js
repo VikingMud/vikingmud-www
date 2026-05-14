@@ -4,7 +4,9 @@
 
   // ── State ───────────────────────────────────────────────────────────────────
 
-  const HELP_DIRS = ['help', 'mortal', 'ghost'];
+  const HELP_DIRS = ['help', 'mortal', 'ghost', 'eternal'];
+  // com/s and com/w are wizard/warlord command dirs — never shown to mortals
+  const WIZARD_DIRS = new Set(['s', 'w']);
 
   let isOpen = false;
   let fileList = [];        // sorted, deduplicated names across all dirs
@@ -143,6 +145,7 @@
       const { dir, names } = r.value;
       for (const n of names) {
         if (!n || n.includes('.') || n === 'index') continue;
+        if (WIZARD_DIRS.has(n)) continue;  // skip wizard command dirs (com/s, com/w)
         if (!(n in fileDir)) fileDir[n] = dir;  // first-found wins
       }
     }
@@ -154,11 +157,9 @@
     const links = doc.querySelectorAll('a[href]');
     const results = [];
     for (const a of links) {
-      let href = a.getAttribute('href');
-      // strip trailing slash
-      href = href.replace(/\/$/, '');
-      // skip parent dir, query strings, absolute URLs, hidden files
-      if (!href || href.startsWith('?') || href.startsWith('/') ||
+      const href = a.getAttribute('href');
+      // skip directories (trailing /), parent dir, query strings, absolute URLs, hidden files
+      if (!href || href.endsWith('/') || href.startsWith('?') || href.startsWith('/') ||
           href.startsWith('http') || href.startsWith('.') || href === '..') continue;
       results.push(decodeURIComponent(href));
     }

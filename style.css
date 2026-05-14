@@ -129,7 +129,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent);display:inline-block}
 .h-display{font-family:var(--serif);font-weight:500;letter-spacing:.02em;
   line-height:.92;margin:0;color:var(--ink);
-  font-size:clamp(56px, 11vw, 168px);text-transform:uppercase}
+  font-size:clamp(56px, 9vw, 110px);text-transform:uppercase}
 .h-1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,6vw,76px);
   line-height:1;margin:0;text-transform:uppercase;letter-spacing:.04em}
 .h-2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.6vw,44px);
@@ -145,7 +145,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nav{position:sticky;top:0;z-index:40;background:color-mix(in oklab, var(--bg) 80%, transparent);
   backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);
   border-bottom:1px solid var(--line)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,2vw,40px);
   padding:14px var(--pad-x);max-width:var(--maxw);margin:0 auto}
 .brand{display:flex;align-items:center;gap:14px}
 .brand-mark{width:34px;height:34px;display:grid;place-items:center;
@@ -161,12 +161,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nav-links a:hover{color:var(--accent)}
 .nav-status{display:flex;align-items:center;gap:10px;
   font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.1em}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--good);
-  box-shadow:0 0 0 0 var(--good);animation:pulse 2.4s infinite}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--good);position:relative}
+.pulse::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--good);animation:pulse 10s infinite}
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--good) 60%, transparent)}
-  70%{box-shadow:0 0 0 10px transparent}
-  100%{box-shadow:0 0 0 0 transparent}
+  0%{opacity:.6;transform:scale(1)}
+  20%{opacity:0;transform:scale(2.5)}
+  21%,100%{opacity:0;transform:scale(1)}
 }
 
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;
@@ -179,11 +180,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn .arrow{transition:transform .2s ease}
 .btn:hover .arrow{transform:translateX(3px)}
 
-.hero{position:relative;padding:clamp(60px,10vh,120px) 0 clamp(80px,12vh,160px);
+.hero{position:relative;padding:clamp(32px,5vh,64px) 0 clamp(48px,7vh,96px);
   overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,6vw,80px);
   align-items:end}
-@media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+@media (max-width:980px){.hero-grid{grid-template-columns:1.4fr 0.6fr;gap:clamp(20px,3vw,40px);align-items:start}}
 .hero-meta{display:flex;justify-content:space-between;align-items:center;
   border-top:1px solid var(--line);padding-top:18px;margin-top:48px;
   font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.14em;
@@ -234,12 +235,12 @@ html[data-theme="terminal"] .ygg-img{
   mix-blend-mode:multiply;opacity:.6;
 }
 .term-bar{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;border-bottom:1px solid var(--line);font-size:11px;
+  padding:10px 14px;border-bottom:1px solid var(--line);font-size:clamp(9px,1.2vw,11px);
   color:var(--term-dim);letter-spacing:.14em;text-transform:uppercase;position:relative;z-index:1}
 .term-bar .dot{width:8px;height:8px;border-radius:50%;background:var(--term-dim);display:inline-block;margin-right:6px}
-.term-body{padding:18px 18px 14px;font-size:13px;line-height:1.55;
-  height:420px;white-space:pre-wrap;word-break:break-word;position:relative;z-index:1;
-  overflow-y:auto}
+.term-body{padding:18px 18px 14px;font-size:clamp(10px,1.4vw,13px);line-height:1.55;
+  height:420px;white-space:pre;overflow-x:auto;overflow-y:auto;
+  position:relative;z-index:1}
 .term-body .room{color:var(--term-fg);font-weight:500}
 .term-body .desc{color:var(--term-dim)}
 .term-body .exits{color:#82c47c}
@@ -1124,4 +1125,25 @@ body.page-devdash .nav{flex-shrink:0}
   .devdash-right{border-left:none;border-top:1px solid var(--line)}
   .devdash-viewer{overflow:visible}
   .devdash-viewer-body{max-height:60vh;overflow-y:auto}
+}
+
+/* ── Mobile layout fixes ────────────────────────────────────────────── */
+@media (max-width:720px){
+  /* Nav: three rows — brand / online count / links */
+  .nav-inner{flex-wrap:wrap;padding-bottom:10px;row-gap:0;align-items:center}
+  .nav-status{
+    order:1;width:100%;
+    border-top:1px solid var(--line-2);padding-top:8px;margin-top:4px;
+    font-size:11px
+  }
+  .nav-links{
+    order:2;width:100%;gap:14px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:8px;margin-top:4px
+  }
+
+  /* Hero: prevent "anno tricesimo quinto" from overlapping the h1 */
+  .title-block .est{position:static;display:block;margin-top:8px}
+
+  /* Hero: each hero-meta item on its own row */
+  .hero-meta{flex-direction:column;gap:6px;margin-top:28px}
 }

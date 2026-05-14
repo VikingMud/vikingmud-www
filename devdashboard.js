@@ -505,6 +505,10 @@
     if (/^(?:(?:void|string|int|float|object|mapping|mixed|status|closure|array|function|varargs|static|private|nomask|public|protected)\s+){1,4}\*{0,2}\w+\s*[\(;,]/.test(plain)) return true;
     // inherit / preprocessor
     if (/^(inherit|#include|#define|#pragma)\s/.test(plain)) return true;
+    // Control flow statement starting a block
+    if (/^(if|else\s+if|for|while|foreach|switch|do)\s*[\({]/.test(plain)) return true;
+    // Comment line
+    if (/^\/[/*]/.test(plain)) return true;
     // Lone opening brace
     if (/^\{\s*$/.test(plain)) return true;
     return false;

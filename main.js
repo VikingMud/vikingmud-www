@@ -243,6 +243,40 @@ async function refreshLive() {
 refreshLive();
 setInterval(refreshLive, 60_000);
 
+// ── Arch list ─────────────────────────────────────────────────────────────────
+
+const LEVEL_TITLE = { 50: 'Administrator', 45: 'Arch Wizard', 42: 'Retired Arch' };
+const DEPT_LABEL  = { web: 'Web', server: 'Server', qc: 'QC', mudlib: 'Mudlib', law: 'Law', driver: 'Driver', doc: 'Docs' };
+const DEPT_ORDER  = ['driver', 'law', 'mudlib', 'qc', 'web', 'server', 'doc'];
+
+async function loadArchList() {
+  try {
+    const data = await fetch('https://www.vikingmud.org/archlist.json').then(r => r.json());
+    const byPerson = {};
+    for (const [dept, names] of Object.entries(data.responsibilitiy)) {
+      for (const name of names) {
+        (byPerson[name] = byPerson[name] || []).push(dept);
+      }
+    }
+    const rows = Object.entries(data.levels)
+      .sort(([na, la], [nb, lb]) => lb - la || na.localeCompare(nb))
+      .map(([name]) => {
+        const title = LEVEL_TITLE[data.levels[name]] || `Level ${data.levels[name]}`;
+        const depts = (byPerson[name] || [])
+          .sort((a, b) => DEPT_ORDER.indexOf(a) - DEPT_ORDER.indexOf(b))
+          .map(d => DEPT_LABEL[d] || d)
+          .join(' · ');
+        const display = name.charAt(0).toUpperCase() + name.slice(1);
+        return `<tr><td>${title}</td><td>${display}</td><td>${depts}</td></tr>`;
+      });
+    document.getElementById('arch-tbody').innerHTML = rows.join('\n');
+  } catch (e) {
+    console.error('Failed to load archlist:', e);
+  }
+}
+
+loadArchList();
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.getElementById('copy-btn')?.addEventListener('click', () => {
