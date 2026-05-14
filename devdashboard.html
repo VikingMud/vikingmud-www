@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Wizard Dashboard</title>
+<meta name="description" content="Interactive wizard dashboard: man pages, LPC lessons, and hook reference for Viking MUD wizards.">
+<meta name="author" content="Viking MUD Administration">
+<link rel="canonical" href="https://www.vikingmud.org/devdashboard.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Viking MUD">
+<meta property="og:url" content="https://www.vikingmud.org/devdashboard.html">
+<meta property="og:title" content="Viking MUD — Wizard Dashboard">
+<meta property="og:description" content="Man pages, LPC lessons, and hook reference for Viking MUD wizards.">
+<meta property="og:image" content="https://www.vikingmud.org/yggdrasil.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viking MUD — Wizard Dashboard">
+<meta name="twitter:description" content="Man pages, LPC lessons, and hook reference for Viking MUD wizards.">
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-devdash">
+<a href="#devdash-layout" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="creator_guide.html">Creator</a>
+      <a href="index.html#admin">Admin</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── Dashboard layout ──────────────────────────────────────────── -->
+<div class="devdash-layout" id="devdash-layout">
+
+  <!-- ── Left: man page tree ──────────────────────────────────────── -->
+  <aside class="devdash-left" aria-label="Man pages">
+    <div class="devdash-searchbar">
+      <span class="devdash-search-icon" aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        id="devdash-search"
+        placeholder="Filter man pages…"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Search man pages"
+        aria-autocomplete="list"
+      >
+      <span class="devdash-search-count" id="devdash-search-count" aria-live="polite"></span>
+    </div>
+    <div class="devdash-tree-wrap" id="devdash-tree-wrap" role="tree" aria-label="Man page directory">
+      <div class="devdash-status" id="devdash-status">Loading wizdoc index…</div>
+      <div id="devdash-tree-nodes"></div>
+      <div id="devdash-filter-nodes" hidden></div>
+    </div>
+  </aside>
+
+  <!-- ── Center: content viewer ───────────────────────────────────── -->
+  <main class="devdash-center" id="devdash-center" aria-label="Documentation viewer">
+    <div class="devdash-welcome" id="devdash-welcome">
+      <div class="devdash-welcome-rune" aria-hidden="true">ᚹ</div>
+      <h1 class="devdash-welcome-title">Wizard Dashboard</h1>
+      <p class="devdash-welcome-sub">Select a man page from the left, or a resource from the right.</p>
+      <p class="devdash-welcome-hint">Start typing to search. ↑↓ navigate · Enter open · Esc clear</p>
+    </div>
+    <div class="devdash-viewer" id="devdash-viewer" hidden>
+      <div class="devdash-viewer-bar">
+        <span class="devdash-viewer-path" id="devdash-viewer-path"></span>
+        <a class="devdash-viewer-ext" id="devdash-viewer-ext" target="_blank" rel="noopener noreferrer">↗ source</a>
+      </div>
+      <div class="devdash-viewer-body" id="devdash-viewer-body" role="region" aria-label="Page content" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <!-- ── Right: resources ─────────────────────────────────────────── -->
+  <aside class="devdash-right" aria-label="Wizard resources">
+    <div class="devdash-right-inner">
+
+      <section class="devdash-rsec">
+        <div class="devdash-rsec-head">
+          <span class="devdash-rsec-eye">LPC Course</span>
+          <h2 class="devdash-rsec-title">Lessons</h2>
+        </div>
+        <div id="devdash-lessons" class="devdash-lessons"></div>
+      </section>
+
+      <section class="devdash-rsec">
+        <div class="devdash-rsec-head">
+          <span class="devdash-rsec-eye">Event System</span>
+          <h2 class="devdash-rsec-title">Hooks</h2>
+        </div>
+        <div id="devdash-hooks" class="devdash-hookgrid"></div>
+      </section>
+
+    </div>
+  </aside>
+
+</div>
+
+<script src="main.js" defer></script>
+<script src="devdashboard.js" defer></script>
+</body>
+</html>
