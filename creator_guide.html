@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Creator Guide</title>
+<meta name="description" content="The Viking MUD creator guide for wizards: wizard rules, interference policy, and contributor agreement.">
+<meta name="author" content="Viking MUD Administration">
+<link rel="canonical" href="https://www.vikingmud.org/creator_guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Viking MUD">
+<meta property="og:url" content="https://www.vikingmud.org/creator_guide.html">
+<meta property="og:title" content="Viking MUD — Creator Guide">
+<meta property="og:description" content="The rules and responsibilities for Viking MUD wizards who shape the world.">
+<meta property="og:image" content="https://www.vikingmud.org/yggdrasil.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viking MUD — Creator Guide">
+<meta name="twitter:description" content="Wizard rules, interference policy, and contributor agreement for Viking MUD creators.">
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Trondheim</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="guide-header guide-header-wiz">
+  <div class="wrap guide-wrap">
+    <span class="eyebrow">Creator Guide</span>
+    <h1 class="h-1">The wizard's<br>path.</h1>
+    <p class="lede">
+      You have reached level 20 and chosen to shape the world rather than
+      merely inhabit it. This guide covers the rules, responsibilities, and
+      agreements that come with wizard status on Viking MUD.
+    </p>
+    <p class="lede lede-mt">
+      <a href="guide.html" class="accent-link">← Back to the mortal guide</a>
+    </p>
+  </div>
+</div>
+
+<!-- ── Table of contents ─────────────────────────────────────────────── -->
+<nav class="guide-toc" aria-label="Contents">
+  <div class="wrap">
+    <ol>
+      <li><a href="#becoming">Becoming a wizard</a></li>
+      <li><a href="#rules">Wizard rules</a></li>
+      <li><a href="#interference">Interference policy</a></li>
+      <li><a href="#agreement">Contributor agreement</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ── 1. Becoming a wizard ──────────────────────────────────────────── -->
+<section id="becoming" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Becoming a wizard</h2>
+    <p>
+      At level 20 you face a choice: become a <strong>Wizard</strong> and help
+      build the world, or an <strong>Eternal</strong> and keep playing as a
+      mortal without the level cap. To reach level 20 as a wizard candidate
+      you must have accumulated the required number of quest points — check
+      <span class="cmd-inline">help advance</span> in game for the current
+      threshold.
+    </p>
+    <p>
+      Once you become a wizard you are <em>no longer a mortal player</em>.
+      Your character steps out of the game world and into its fabric. You gain
+      access to powerful commands, your own directory in the file system, and
+      the ability to write LPC code that other players will encounter.
+      With that access comes a set of rules every wizard must follow.
+    </p>
+    <h3>The wizard hierarchy</h3>
+    <p>
+      Wizards progress through ranks as they contribute. New wizards start at
+      the bottom and work upward by writing areas, maintaining code, and earning
+      trust from the arch wizards who oversee quality and policy.
+    </p>
+    <div class="cmd-block">
+      <span><span class="prompt">&gt; </span>help arches</span>
+      <span><span class="prompt">&gt; </span>help wizrules</span>
+      <span><span class="prompt">&gt; </span>help grant</span>
+    </div>
+    <p>
+      When in doubt about anything — rules, access, whether something is a
+      bug or a feature — contact an arch wizard or admin. If no arch responds
+      within a few minutes, be patient: many check the MUD between tasks at
+      work.
+    </p>
+  </div>
+</section>
+
+<!-- ── 2. Wizard rules ────────────────────────────────────────────────── -->
+<section id="rules" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Wizard rules</h2>
+    <p>
+      These rules apply to all wizards. They must not be read too literally —
+      use common sense. Normal player rules also apply to wizards (type
+      <span class="cmd-inline">help rules</span> in game), except for the
+      "robots" clause. Arch wizards are not strictly bound by these rules.
+    </p>
+
+    <h3>1 — Interference</h3>
+    <p>
+      A wizard is no longer part of the mortal game. You may never interfere —
+      directly or indirectly — with the normal flow of the game. The sole
+      exception is adding features (see rule 2). This also means you may not
+      use your wizard character for <em>any</em> mortal character's benefit.
+    </p>
+    <p>
+      You may not walk around in areas you do not have read or write access to
+      (see <span class="cmd-inline">help grant</span>), unless the area is the
+      guild area, the backbone area (anything in <span class="cmd-inline">/room/</span>),
+      or you have explicit permission from an arch or the area maintainer.
+    </p>
+    <p>
+      See the <a href="#interference" class="accent-link">Interference Policy</a>
+      section below for detailed examples.
+    </p>
+
+    <h3>2 — Adding features</h3>
+    <p>
+      You may not let objects into the mortal game without QC (Quality Control)
+      approval. Use <span class="cmd-inline">help arches</span> to find the
+      right people. This includes "testing" items on live players.
+      Coding things that otherwise help players is equally off-limits without
+      QC sign-off.
+    </p>
+
+    <h3>3 — Test characters</h3>
+    <p>
+      If you need a test character, register it in
+      <span class="cmd-inline">/room/admin_room</span>. A test character may
+      not itself be a wizard, but is treated as one for rule purposes.
+      The multiplaying restriction does not apply to your test character when
+      it is logged in at the same time as your wizard — but only then.
+    </p>
+
+    <h3>4 — Privacy</h3>
+    <p>
+      Respect other players' privacy. Checking or entering another player's or
+      wizard's inventory is not allowed unless the person approves, or you
+      suspect a bug and no arch wizard is present to handle it. When in doubt,
+      wait and ask.
+    </p>
+
+    <h3>5 — Code</h3>
+    <p>
+      Certain code patterns can freeze or crash the MUD. Be careful. Do not
+      write objects or commands designed to grant yourself access or privileges
+      you would not normally have. Be cautious about modifying player objects —
+      severe cases are handled by the Law team.
+    </p>
+
+    <h3>6 — Disk usage</h3>
+    <p>
+      Your wizard directory is not private storage. Do not keep confidential
+      material there, and do not waste disk space on non-MUD files (archives,
+      images, etc.). Such files may be deleted without notice when space is
+      needed.
+    </p>
+
+    <h3>7 — Multiplaying</h3>
+    <p>
+      Wizards are bound by the standard multiplaying rules. The exception: wizards
+      of level 36 or above have proven themselves as developers and may have a
+      mortal character logged in at the same time.
+    </p>
+
+    <div class="wiz-rule-footer">
+      <p>
+        Wizards who do not follow these rules may be demoted, suspended,
+        banished, or have their site locked out — depending on the severity.
+        Any other means deemed fit may also be used.
+      </p>
+      <p>
+        <em>Wizardhood is a privilege, not a right. Use it wisely.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. Interference policy ────────────────────────────────────────── -->
+<section id="interference" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Interference policy</h2>
+    <p>
+      The following examples clarify what "game interference" means in practice.
+      When in doubt, do nothing and ask an arch.
+    </p>
+
+    <h3>1 — Do not patch mortals</h3>
+    <p>
+      Patching means modifying a mortal's stats or attributes — money,
+      experience, hit points, and so on. This is never allowed for a wizard
+      acting alone.
+    </p>
+
+    <h3>2 — Helping a stuck mortal</h3>
+    <p>
+      You may teleport a mortal out of a location if they are genuinely stuck
+      due to a confirmed bug. You may <em>not</em> restore their lost stats or
+      items — that is the arch wizards' responsibility.
+      Before acting, make sure it really is a bug and not a game feature.
+      If you are unsure, ask an arch or the area creator. Do not act unless
+      you have not received a response after about ten minutes.
+    </p>
+
+    <h3>3 — Walking in open areas</h3>
+    <p>
+      Do not walk around in open (live) areas other than those you have
+      read/write access to, <em>and</em> know will not disrupt the game. Moving
+      through an area can trigger scripts you are unaware of.
+      The backbone area (Larstown, eastroad, and all rooms in
+      <span class="cmd-inline">/room/</span>) is exempt — use
+      <span class="cmd-inline">creator</span> to check; backbone rooms read
+      <em>"Your delicate mind senses that this is a part of Odin's original creation."</em>
+    </p>
+
+    <h3>4 — Cloning from open areas</h3>
+    <p>
+      Do not clone, load, or access objects from an open area without explicit
+      permission from the creator and/or maintainer of that area.
+    </p>
+
+    <h3>5 — Misleading messages</h3>
+    <p>
+      Do not generate messages that could deceive players — things like
+      <em>"Connection closed by foreign host."</em>, <em>"You die."</em>, or
+      messages that make you appear to be someone or something you are not.
+      Do not set titles or pretitles that misrepresent your identity.
+    </p>
+  </div>
+</section>
+
+<!-- ── 4. Contributor agreement ──────────────────────────────────────── -->
+<section id="agreement" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Contributor agreement</h2>
+    <p>
+      This agreement governs all code and content you contribute to Viking MUD.
+      By contributing, you accept these terms.
+    </p>
+
+    <ol class="wiz-agreement-list">
+      <li>
+        By contributing any code or content — or modification thereof — you grant
+        Viking MUD a perpetual, royalty-free license to:
+        <ul>
+          <li>use, copy, maintain, modify, and erase such code or content on Viking MUD, our website, or other Viking MUD services;</li>
+          <li>designate responsibility for maintaining the code to other Viking MUD contributors;</li>
+          <li>use, copy, maintain, modify, and erase such code or content in development, test, and production systems.</li>
+        </ul>
+      </li>
+      <li>
+        You may grant additional rights — such as the right to redistribute or
+        resell — by providing Viking MUD additional, specific permissive licenses
+        of your choice (dual-licensing). Such licenses may not revoke Viking MUD's
+        perpetual license described above.
+      </li>
+      <li>
+        Viking MUD cannot accept any code or content that Viking MUD is not free
+        to handle as described above.
+      </li>
+      <li>
+        You are solely responsible for ensuring your contributions do not violate
+        the <a href="terms.html" class="accent-link">AUP</a>, third parties'
+        intellectual property rights (copyright, trademarks), or any applicable law.
+      </li>
+      <li>
+        You guarantee that your contributions neither violate such rights nor are illegal.
+      </li>
+      <li>
+        Through contributor access you may encounter private and personal information
+        about other players. You agree to respect others' privacy and to not gather
+        or use personal information unnecessarily.
+      </li>
+      <li>
+        If Viking MUD becomes aware of contributions that violate intellectual
+        property rights or are illegal, and you cannot prove you hold the necessary
+        rights, we reserve the right to remove or modify such content and to revoke
+        your contribution privileges.
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+</main>
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001/2002</span>
+    <span><a href="guide.html" class="foot-back">← Back to guide</a></span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+<script src="help.js" defer></script>
+
+</body>
+</html>

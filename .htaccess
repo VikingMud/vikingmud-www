@@ -2,3 +2,36 @@ Options +FollowSymLinks
 AddType application/javascript .js
 AddType text/css              .css
 AddType font/woff2            .woff2
+
+# ── Redirect /new/* to root (old staging path) ───────────────────────
+RedirectMatch 301 ^/new/(.+)$ /$1
+
+# ── Old .shtml pages → new .html equivalents ─────────────────────────
+Redirect 301 /index.shtml                 /index.html
+Redirect 301 /news.shtml                  /index.html#news
+Redirect 301 /contact.shtml               /index.html#community
+Redirect 301 /guildindex.shtml            /index.html#guilds
+Redirect 301 /sysinfo.shtml               /index.html
+
+Redirect 301 /newbie.shtml                /guide.html
+Redirect 301 /introduction.shtml          /guide.html
+Redirect 301 /newchar.shtml               /guide.html#creating
+Redirect 301 /tips.shtml                  /guide.html#tips
+Redirect 301 /putty_connect.shtml         /guide.html#creating
+
+Redirect 301 /quests.shtml                /quests.html
+
+Redirect 301 /wizrules.shtml              /creator_guide.html
+Redirect 301 /contributor-agreement.shtml /creator_guide.html
+
+Redirect 301 /privacy.shtml               /privacy.html
+Redirect 301 /simplified-privacy.shtml    /privacy.html
+Redirect 301 /aup.shtml                   /terms.html
+Redirect 301 /terms.shtml                 /terms.html
+Redirect 301 /baserules.shtml             /terms.html
+Redirect 301 /mudrules.shtml              /terms.html
+
+Redirect 301 /other.shtml                 /index.html
+
+Redirect 301 /year_in_review_2024.shtml   /year-in-review.html
+Redirect 301 /year_in_review_2025.shtml   /year-in-review.html

@@ -523,6 +523,114 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
   border-left:2px solid var(--line);padding-left:14px}
 .accent-link{color:var(--accent)}
 
+/* ── Guide: quests CTA block ────────────────────────────────────────── */
+.quest-cta-block{
+  margin-top:32px;border:1px solid var(--line);background:var(--bg-2);
+}
+.quest-cta-inner{
+  display:flex;align-items:center;gap:20px;padding:clamp(18px,3vw,28px);
+  flex-wrap:wrap;
+}
+.quest-cta-rune{
+  font-family:var(--serif);font-size:48px;font-weight:600;
+  color:var(--accent);line-height:1;flex-shrink:0;
+  text-shadow:0 0 24px color-mix(in oklab, var(--accent) 30%, transparent);
+}
+.quest-cta-label{
+  font-family:var(--serif);font-weight:500;font-size:18px;
+  text-transform:uppercase;letter-spacing:.04em;
+  color:var(--ink);margin:0 0 4px;
+}
+.quest-cta-sub{
+  font-size:13.5px;line-height:1.55;color:var(--ink-2);margin:0;max-width:none;
+}
+.quest-cta-link{
+  margin-left:auto;flex-shrink:0;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--accent);padding:12px 20px;
+  transition:background .15s ease,color .15s ease;white-space:nowrap;
+}
+.quest-cta-link:hover{background:var(--accent);color:var(--accent-ink)}
+.quest-cta-continue{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);
+  padding:10px clamp(18px,3vw,28px);
+  border-top:1px solid var(--line-2);margin:0;
+}
+.quest-cta-continue a{
+  color:var(--accent);
+  border-bottom:1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  transition:color .15s,border-color .15s;
+}
+.quest-cta-continue a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ── Guide: path chooser ────────────────────────────────────────────── */
+.guide-paths{
+  padding:clamp(32px,5vw,56px) 0;
+  border-bottom:1px solid var(--line);
+  background:var(--bg-2);
+}
+.guide-paths-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 20px;
+}
+.guide-path-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+@media (max-width:640px){.guide-path-grid{grid-template-columns:1fr}}
+.guide-path-card{
+  background:var(--bg);padding:clamp(24px,3vw,36px);
+  display:flex;flex-direction:column;gap:20px;
+  transition:background .2s ease;
+}
+a.guide-path-card{text-decoration:none;cursor:pointer}
+a.guide-path-card:hover{background:var(--surface)}
+.guide-path-rune{
+  font-family:var(--serif);font-size:clamp(48px,7vw,72px);font-weight:600;
+  color:var(--accent);line-height:1;
+  text-shadow:0 0 30px color-mix(in oklab, var(--accent) 30%, transparent);
+}
+.guide-path-title{
+  font-family:var(--serif);font-weight:500;font-size:clamp(22px,2.5vw,28px);
+  text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;color:var(--ink);
+}
+.guide-path-desc{
+  font-size:14px;line-height:1.6;color:var(--ink-2);margin:0;
+}
+.guide-path-cta{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin-top:auto;
+}
+
+/* ── Creator guide: header tint ─────────────────────────────────────── */
+.guide-header-wiz{
+  background:color-mix(in oklab, var(--accent) 4%, var(--bg));
+}
+
+/* ── Creator guide: wizard rule footer callout ──────────────────────── */
+.wiz-rule-footer{
+  margin-top:36px;padding:clamp(20px,3vw,28px);
+  border:1px solid var(--line);background:var(--bg-2);
+}
+.wiz-rule-footer p{
+  font-size:15px;line-height:1.7;color:var(--ink-2);max-width:66ch;margin:0 0 10px;
+}
+.wiz-rule-footer p:last-child{margin-bottom:0}
+
+/* ── Creator guide: contributor agreement list ──────────────────────── */
+.wiz-agreement-list{
+  margin:24px 0 0;padding:0 0 0 1.6em;display:flex;flex-direction:column;gap:18px;
+  font-size:15px;line-height:1.7;color:var(--ink-2);
+}
+.wiz-agreement-list li::marker{color:var(--accent);font-family:var(--mono);font-weight:600}
+.wiz-agreement-list ul{
+  margin:10px 0 0;padding:0 0 0 1.4em;display:flex;flex-direction:column;gap:6px;
+  font-size:14px;line-height:1.6;
+}
+.wiz-agreement-list ul li::marker{color:var(--accent-2)}
+
 /* ── Help terminal widget ─────────────────────────────────────────────────── */
 #help-fab {
   position: fixed;
@@ -674,4 +782,57 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
 .hc-underline { text-decoration: underline; }
 .hc-inverse   { filter: invert(1); }
 .hc-blink     { animation: hc-blink 1s step-end infinite; }
+
+/* quests page */
+.quest-header{padding:clamp(48px,8vh,96px) 0 clamp(40px,6vh,72px);border-bottom:1px solid var(--line)}
+.quest-header .eyebrow{margin-bottom:18px}
+.quest-header .h-1{margin:18px 0 24px}
+.quest-stats{display:flex;gap:clamp(32px,6vw,64px);flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.quest-stat{display:flex;flex-direction:column;gap:4px}
+.quest-stat-n{font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:500;color:var(--accent);line-height:1}
+.quest-stat-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.quest-breadcrumb{padding:14px 0;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.quest-breadcrumb .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.quest-bc-link{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:inline-flex;align-items:center;gap:8px;transition:color .15s ease}
+.quest-bc-link:hover{color:var(--accent)}
+.quest-bc-continue{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.quest-bc-continue a{color:var(--accent);border-bottom:1px solid color-mix(in oklab, var(--accent) 40%, transparent);transition:color .15s ease,border-color .15s ease}
+.quest-bc-continue a:hover{color:var(--ink);border-color:var(--ink)}
+.quest-filter-bar{padding:18px 0;border-bottom:1px solid var(--line);background:color-mix(in oklab, var(--bg-2) 90%, transparent);backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);position:sticky;top:57px;z-index:20}
+.quest-filter-inner{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.quest-search{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:13px;padding:10px 14px;outline:none;transition:border-color .15s ease}
+.quest-search::placeholder{color:var(--ink-3)}
+.quest-search:focus{border-color:var(--accent)}
+.quest-filter-btns{display:flex;gap:4px;flex-wrap:wrap}
+.filter-btn{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;transition:all .15s ease}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.quest-count{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;margin-left:auto}
+.quest-grid-section{padding:clamp(32px,5vh,56px) 0}
+.quest-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.quest-card{background:var(--bg);padding:22px;display:flex;flex-direction:column;gap:10px;transition:background .2s ease}
+.quest-card:hover{background:var(--surface)}
+.quest-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.quest-card-name{font-family:var(--serif);font-weight:500;font-size:19px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);line-height:1.1;margin:0}
+.quest-qp{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 9px;white-space:nowrap;flex-shrink:0;align-self:flex-start}
+.quest-hint{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--ink-2);margin:0;flex:1;white-space:pre-wrap;min-width:80ch}
+.quest-difficulty{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding-top:10px;border-top:1px solid var(--line-2);display:flex;align-items:center;gap:6px;margin-top:auto}
+.diff-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.diff-easy  .diff-dot{background:var(--good)}
+.diff-medium .diff-dot{background:var(--accent)}
+.diff-hard  .diff-dot{background:#d4934a}
+.diff-epic  .diff-dot{background:var(--danger)}
+.diff-easy  {color:var(--good)}
+.diff-medium{color:var(--accent)}
+.diff-hard  {color:#d4934a}
+.diff-epic  {color:var(--danger)}
+.quest-qp-label{font-size:10px;color:var(--ink-3);letter-spacing:.1em}
+.quest-empty{grid-column:1/-1;padding:72px 24px;text-align:center;font-family:var(--mono);font-size:13px;color:var(--ink-3);letter-spacing:.14em}
+.quest-loading{grid-column:1/-1;padding:80px 24px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.2em;text-transform:uppercase}
+.quest-footer-nav{border-top:1px solid var(--line);padding:clamp(28px,4vw,48px) 0;background:var(--bg-2)}
+.quest-footer-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.quest-footer-text{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.quest-footer-text strong{color:var(--ink);display:block;font-family:var(--serif);font-size:22px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.quest-footer-cta{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:13px 24px;transition:all .15s ease;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.quest-footer-cta:hover{background:var(--accent);color:var(--accent-ink)}
 @keyframes hc-blink { 50% { opacity: 0; } }
