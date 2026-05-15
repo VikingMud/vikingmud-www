@@ -138,11 +138,14 @@
     return { name: path.split('/').pop(), path, files, children };
   }
 
+  const PROPS_PREFIX = 'properties/';
+
   // ── State ───────────────────────────────────────────────────────────────────
   let allFiles     = [];   // [{path, name, section}]
   let filtered     = [];   // current filter results
   let focusIdx     = -1;
   const cache      = {};
+  const propsMap   = {};   // name → property object
   let treeNodes    = null; // div#devdash-tree-nodes
   let filterNodes  = null; // div#devdash-filter-nodes
 
@@ -198,6 +201,9 @@
     trees.forEach(t => treeNodes.appendChild(buildTreeEl(t)));
     setStatus('');
     updateCount();
+
+    // Load properties.json alongside wizdoc content
+    fetchAndRenderProperties();
   }
 
   function setStatus(msg) {
@@ -402,8 +408,145 @@
     }
   }
 
+  // ── Properties ──────────────────────────────────────────────────────────────
+  async function fetchAndRenderProperties() {
+    try {
+      const r = await fetch('properties.json');
+      if (!r.ok) return;
+      const data = await r.json();
+      const props = data.properties || [];
+
+      props.forEach(p => {
+        propsMap[p.name] = p;
+        allFiles.push({ path: PROPS_PREFIX + p.name, name: p.name, section: 'properties' });
+      });
+      allFiles.sort((a, b) => a.name.localeCompare(b.name));
+      filtered = allFiles;
+
+      treeNodes.appendChild(buildPropsTreeEl(props));
+      updateCount();
+    } catch (_) {}
+  }
+
+  function buildPropsTreeEl(props) {
+    const TYPES = ['Livings', 'Monsters', 'Objects', 'Players', 'Rooms', 'Wizards'];
+    const byType = {};
+    TYPES.forEach(t => { byType[t] = []; });
+
+    props.forEach(p => {
+      (p.type || []).forEach(t => { if (byType[t]) byType[t].push(p); });
+    });
+
+    const wrap = document.createElement('div');
+    wrap.className = 'devdash-dir';
+
+    const head = document.createElement('button');
+    head.className = 'devdash-dir-head';
+    head.setAttribute('aria-expanded', 'false');
+    head.setAttribute('type', 'button');
+    head.innerHTML =
+      `<span class="dd-arrow" aria-hidden="true">▶</span>` +
+      `<span class="dd-name">properties</span>` +
+      `<span class="dd-count">${props.length}</span>`;
+
+    const body = document.createElement('div');
+    body.className = 'devdash-dir-body';
+    body.hidden = true;
+
+    TYPES.forEach(type => {
+      const group = byType[type];
+      if (!group.length) return;
+
+      const subWrap = document.createElement('div');
+      subWrap.className = 'devdash-dir';
+
+      const subHead = document.createElement('button');
+      subHead.className = 'devdash-dir-head';
+      subHead.setAttribute('aria-expanded', 'false');
+      subHead.setAttribute('type', 'button');
+      subHead.innerHTML =
+        `<span class="dd-arrow" aria-hidden="true">▶</span>` +
+        `<span class="dd-name">${esc(type)}</span>` +
+        `<span class="dd-count">${group.length}</span>`;
+
+      const subBody = document.createElement('div');
+      subBody.className = 'devdash-dir-body';
+      subBody.hidden = true;
+
+      group.slice().sort((a, b) => a.name.localeCompare(b.name))
+        .forEach(p => subBody.appendChild(buildPropEl(p)));
+
+      subHead.addEventListener('click', () => {
+        const open = subHead.getAttribute('aria-expanded') === 'true';
+        subHead.setAttribute('aria-expanded', String(!open));
+        subHead.querySelector('.dd-arrow').textContent = open ? '▶' : '▼';
+        subBody.hidden = open;
+      });
+
+      subWrap.append(subHead, subBody);
+      body.appendChild(subWrap);
+    });
+
+    head.addEventListener('click', () => {
+      const open = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', String(!open));
+      head.querySelector('.dd-arrow').textContent = open ? '▶' : '▼';
+      body.hidden = open;
+    });
+
+    wrap.append(head, body);
+    return wrap;
+  }
+
+  function buildPropEl(prop) {
+    const el = document.createElement('button');
+    el.className = 'devdash-file';
+    el.setAttribute('type', 'button');
+    el.dataset.path = PROPS_PREFIX + prop.name;
+    el.textContent = prop.name;
+    el.addEventListener('click', () => loadProperty(prop));
+    return el;
+  }
+
+  function loadProperty(prop) {
+    document.querySelectorAll('.devdash-active')
+      .forEach(e => e.classList.remove('devdash-active'));
+    document.querySelectorAll(`[data-path="${CSS.escape(PROPS_PREFIX + prop.name)}"]`)
+      .forEach(e => e.classList.add('devdash-active'));
+
+    welcomeEl.hidden = true;
+    viewerEl.hidden  = false;
+
+    viewerPath.textContent = PROPS_PREFIX + prop.name;
+    viewerExt.hidden = true;
+
+    showProperty(prop);
+  }
+
+  function showProperty(prop) {
+    const types = (prop.type || [])
+      .map(t => `<span class="prop-type-badge">${esc(t)}</span>`)
+      .join('');
+    const desc = (prop.description || '').trim();
+
+    viewerBody.innerHTML =
+      `<div class="prop-view">` +
+        `<div class="prop-eyebrow">Property</div>` +
+        `<h2 class="prop-name">${esc(prop.name)}</h2>` +
+        `<div class="prop-types">${types || ''}</div>` +
+        `<div class="prop-creator">creator: ${esc(prop.creator || '—')}</div>` +
+        `<pre class="prop-desc">${esc(desc) || '<em>No description.</em>'}</pre>` +
+      `</div>`;
+  }
+
   // ── Content loading ──────────────────────────────────────────────────────────
   async function loadContent(path) {
+    // Route property lookups to the inline renderer
+    if (path.startsWith(PROPS_PREFIX)) {
+      const prop = propsMap[path.slice(PROPS_PREFIX.length)];
+      if (prop) { loadProperty(prop); return; }
+    }
+
     // Mark active
     document.querySelectorAll('.devdash-active')
       .forEach(e => e.classList.remove('devdash-active'));
@@ -415,7 +558,8 @@
 
     const name = path.split('/').pop();
     viewerPath.textContent = path;
-    viewerExt.href = WIZDOC_ROOT + path;
+    viewerExt.href    = WIZDOC_ROOT + path;
+    viewerExt.hidden  = false;
 
     viewerBody.innerHTML = '<span class="devdash-loading">Loading…</span>';
 

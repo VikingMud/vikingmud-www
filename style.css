@@ -198,8 +198,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 }
 .hero > .wrap{position:relative;z-index:1}
 
-.title-block{position:relative}
-.title-block .est{position:absolute;top:6px;right:0;
+.title-block .est{display:block;margin-top:10px;
   font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-3);
   text-transform:uppercase}
 
@@ -621,6 +620,7 @@ a.guide-path-card:hover{background:var(--surface)}
 }
 .wiz-rule-footer p:last-child{margin-bottom:0}
 
+
 /* ── Creator guide: contributor agreement list ──────────────────────── */
 .wiz-agreement-list{
   margin:24px 0 0;padding:0 0 0 1.6em;display:flex;flex-direction:column;gap:18px;
@@ -784,6 +784,39 @@ a.guide-path-card:hover{background:var(--surface)}
 .hc-underline { text-decoration: underline; }
 .hc-inverse   { filter: invert(1); }
 .hc-blink     { animation: hc-blink 1s step-end infinite; }
+
+/* ── Organization nav list ──────────────────────────────────────────── */
+.org-nav-list{display:flex;flex-direction:column}
+.org-nav-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:24px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  cursor:pointer;
+}
+.org-nav-row:first-child{border-top:1px solid var(--line)}
+.org-nav-title{
+  display:block;
+  font-family:var(--serif);font-weight:500;font-size:clamp(20px,2.2vw,26px);
+  text-transform:uppercase;letter-spacing:.04em;
+  color:var(--accent);
+  line-height:1.1;margin-bottom:5px;
+  transition:color .15s ease;
+}
+.org-nav-desc{
+  display:block;
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-3);
+  line-height:1.5;
+}
+.org-nav-arr{
+  font-family:var(--mono);font-size:20px;color:var(--accent);
+  flex-shrink:0;opacity:.6;transition:opacity .15s ease, transform .15s ease;
+}
+.org-nav-row:hover .org-nav-title{color:var(--ink)}
+.org-nav-row:hover .org-nav-arr{opacity:1;transform:translateX(5px)}
 
 /* quests page */
 .quest-header{padding:clamp(48px,8vh,96px) 0 clamp(40px,6vh,72px);border-bottom:1px solid var(--line)}
@@ -1113,8 +1146,17 @@ body.page-devdash .nav{flex-shrink:0}
 .lpc-preproc { color: #dd77ff; }
 .lpc-num     { color: #ffcc44; }
 
-/* Responsive: stack panels below 900px */
-@media (max-width:900px){
+/* ── Property viewer ─────────────────────────────────────────────────────── */
+.prop-view{padding:16px 20px;max-width:700px}
+.prop-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.prop-name{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--term-fg);margin:0 0 10px}
+.prop-types{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.prop-type-badge{padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;background:color-mix(in oklab,var(--accent) 15%,transparent);color:var(--accent);border:1px solid color-mix(in oklab,var(--accent) 30%,transparent)}
+.prop-creator{font-size:11px;color:var(--ink-3);margin-bottom:14px}
+.prop-desc{margin:0;font-family:var(--mono);font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:12px 14px}
+
+/* Responsive: stack panels below 1150px */
+@media (max-width:1150px){
   body.page-devdash{height:auto;overflow:auto}
   .devdash-layout{
     grid-template-columns:1fr;
@@ -1127,22 +1169,19 @@ body.page-devdash .nav{flex-shrink:0}
   .devdash-viewer-body{max-height:60vh;overflow-y:auto}
 }
 
-/* ── Mobile layout fixes ────────────────────────────────────────────── */
-@media (max-width:720px){
+/* ── Compact nav + mobile layout fixes ──────────────────────────────── */
+@media (max-width:1150px){
   /* Nav: three rows — brand / online count / links */
   .nav-inner{flex-wrap:wrap;padding-bottom:10px;row-gap:0;align-items:center}
   .nav-status{
     order:1;width:100%;
     border-top:1px solid var(--line-2);padding-top:8px;margin-top:4px;
-    font-size:11px
+    font-size:11px;white-space:nowrap;flex-shrink:0
   }
   .nav-links{
     order:2;width:100%;gap:14px;flex-wrap:wrap;
     border-top:1px solid var(--line);padding-top:8px;margin-top:4px
   }
-
-  /* Hero: prevent "anno tricesimo quinto" from overlapping the h1 */
-  .title-block .est{position:static;display:block;margin-top:8px}
 
   /* Hero: each hero-meta item on its own row */
   .hero-meta{flex-direction:column;gap:6px;margin-top:28px}
