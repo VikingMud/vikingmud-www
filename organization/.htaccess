@@ -1,0 +1,14 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Redirect old /org/ path to /organization/
+RewriteCond %{THE_REQUEST} \s/org/(.*)\.shtml[\s?] [NC]
+RewriteRule ^ /organization/%1.html [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/org/?[\s?] [NC]
+RewriteRule ^ /organization/ [R=301,L]
+
+# Redirect .shtml to .html within /organization/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)\.shtml$ /organization/$1.html [R=301,L]

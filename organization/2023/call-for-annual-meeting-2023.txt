@@ -1,0 +1,65 @@
+Hi,
+
+This is the call for the annual meeting in the VikingMUD organization,
+which must be held no later than May each year.
+
+The annual meeting of 2023 shall be held as an online conference on 21
+May 2023 at 19:00 UTC (21:00 CEST).
+
+Please read the bylaws at:
+
+https://www.vikingmud.org/org/2021/bylaws-2021.pdf
+
+The full agenda, including any received proposals and details on how
+to attend the meeting, shall be published no later than 14 May 2023 at
+18:59 UTC (20:59 CEST).
+
+The board has one proposition for this annual meeting:
+
+We propose amending the bylaws so that each year, half the board is up
+for election, for the sake of continuity across election years. The
+proposal will be published in full at least one week before the
+annual meeting.
+
+The preliminary agenda is:
+
+  1. Register members and votes present
+  2. Elect chair of the meeting and minute taker
+  3. Process annual report / accounts
+  4. Amendment of bylaws
+  5. Process received proposals
+  6. Determine membership dues
+  7. Elect the board
+
+As per the bylaws, anyone with a wizard (or higher) who has paid the
+membership (currently free-of-charge), have the right to attend, to
+vote, and are eligible for election. Administrators have two votes
+each, all other members a single vote each.
+
+In accordance with the bylaws, the following board members elected in
+2021 have now served their term, and their positions are up for
+election:
+
+Dios (chair)
+Drake
+Gaeius (treasurer)
+Kralk
+
+All board members have indicated that they wish to serve another term.
+
+The following board member was elected in 2022 and is not up for
+election:
+
+Moreldir
+
+The board urges any candidates who wish to serve as a board member, to
+stand for election.
+
+For inclusion in the final agenda, please submit candidacies and any
+proposals to Dios via mudmail no later than 13 May 2023 18:00 UTC
+(20:00 CEST).
+
+For board member candidacies there is no strict time limit as such.
+
+On behalf of the VikingMUD organization's board,
+Dios, Chair of the board

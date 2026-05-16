@@ -1,0 +1,48 @@
+Hi,
+
+This is the call for the annual meeting in the VikingMUD organization,
+which must be held no later than May each year.
+
+The annual meeting of 2022 shall be held as an online conference on 26
+May 2022 at 20:00 UTC (22:00 CEST).
+
+Please read the bylaws at:
+
+https://www.vikingmud.org/org/2021/bylaws-2021.pdf
+
+The full agenda, including any received proposals and details on how
+to attend the meeting, shall be published no later than 19 May 2022 at
+19:59 UTC (21:59 CEST).
+
+The preliminary agenda is:
+
+  1. Register members and votes present
+  2. Elect chair of the meeting and minute taker
+  3. Process annual report / accounts
+  4. Process received proposals
+  5. Determine membership dues
+  6. Elect the board
+
+As per the bylaws, anyone with a wizard (or higher) who has paid the
+membership (currently free-of-charge), have the right to attend, to
+vote, and are eligible for election. Administrators have two votes
+each, all other members a single vote each.
+
+The current board members, elected for two years as of 2021, are:
+
+Dios (chair)
+Drake
+Gaeius (treasurer)
+Kralk
+
+As all current board members are sitting until May 2023, this will be
+a supplementary election.
+
+For inclusion in the final agenda, please submit candidacies and any
+proposals to Dios via mudmail no later than 18 May 2022 18:00 UTC
+(20:00 CEST).
+
+For board member candidacies there is no strict time limit as such.
+
+On behalf of the VikingMUD organization's board,
+Dios, Chair of the board

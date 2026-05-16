@@ -2,8 +2,8 @@
 (function () {
   'use strict';
 
-  const BASE = 'wizdoc/';
-  const WIZDOC_ROOT = 'https://www.vikingmud.org/wizdoc/';
+  const BASE         = 'wizdoc/';
+  const WIZDOC_ROOT  = 'https://www.vikingmud.org/wizdoc/';
 
   // ── Lessons metadata ────────────────────────────────────────────────────────
   const LESSONS = [
@@ -202,8 +202,9 @@
     setStatus('');
     updateCount();
 
-    // Load properties.json alongside wizdoc content
-    fetchAndRenderProperties();
+    // Load properties alongside wizdoc content, then handle any deep link
+    await fetchAndRenderProperties();
+    processDeepLink();
   }
 
   function setStatus(msg) {
@@ -408,6 +409,26 @@
     }
   }
 
+  // ── Deep linking ────────────────────────────────────────────────────────────
+  function processDeepLink() {
+    const p = new URLSearchParams(location.search).get('p');
+    if (p) loadContent(p);
+  }
+
+  function setDeepLink(path) {
+    history.replaceState(null, '', '?p=' + encodeURIComponent(path));
+  }
+
+  // ── MUD in-game command ──────────────────────────────────────────────────────
+  function mudLinkHtml(path) {
+    const name = path.split('/').pop();
+    let cmd;
+    if (path.startsWith(PROPS_PREFIX))      cmd = 'lookupp ' + name;
+    else if (path.split('/')[0] === 'help') cmd = 'help ' + name;
+    else                                     cmd = 'man ' + name;
+    return `<div class="mud-link"><span class="mud-link-label">In-game</span><code class="mud-link-cmd">${esc(cmd)}</code></div>`;
+  }
+
   // ── Properties ──────────────────────────────────────────────────────────────
   async function fetchAndRenderProperties() {
     try {
@@ -425,7 +446,50 @@
 
       treeNodes.appendChild(buildPropsTreeEl(props));
       updateCount();
+      renderPropsPanel(props);
     } catch (_) {}
+  }
+
+  function renderPropsPanel(props) {
+    const el = document.getElementById('devdash-props-panel');
+    if (!el) return;
+
+    const section = el.closest('.devdash-rsec');
+    const head    = section && section.querySelector('.devdash-rsec-head');
+    if (head) {
+      head.classList.add('devdash-rsec-toggle');
+      head.setAttribute('role', 'button');
+      head.setAttribute('tabindex', '0');
+      const arrow = document.createElement('span');
+      arrow.className = 'devdash-rsec-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '▶';
+      head.appendChild(arrow);
+      section.setAttribute('aria-expanded', 'false');
+      el.hidden = true;
+      const toggle = () => {
+        const open = section.getAttribute('aria-expanded') === 'true';
+        section.setAttribute('aria-expanded', String(!open));
+        el.hidden = open;
+      };
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    }
+
+    const sorted = props.slice().sort((a, b) => a.name.localeCompare(b.name));
+    const frag = document.createDocumentFragment();
+    sorted.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'devdash-hook';
+      btn.setAttribute('type', 'button');
+      btn.dataset.path = PROPS_PREFIX + p.name;
+      btn.textContent  = p.name;
+      btn.addEventListener('click', () => loadProperty(p));
+      frag.appendChild(btn);
+    });
+    el.appendChild(frag);
   }
 
   function buildPropsTreeEl(props) {
@@ -509,6 +573,7 @@
   }
 
   function loadProperty(prop) {
+    setDeepLink(PROPS_PREFIX + prop.name);
     document.querySelectorAll('.devdash-active')
       .forEach(e => e.classList.remove('devdash-active'));
     document.querySelectorAll(`[data-path="${CSS.escape(PROPS_PREFIX + prop.name)}"]`)
@@ -523,11 +588,55 @@
     showProperty(prop);
   }
 
+  function propRefList(names) {
+    return (names || []).map(n => {
+      const known = propsMap[n];
+      if (known) {
+        return `<button class="prop-ref" type="button" data-prop="${esc(n)}">${esc(n)}</button>`;
+      }
+      return `<span class="prop-ref-unknown">${esc(n)}</span>`;
+    }).join('');
+  }
+
+  function showTypeIndex(type) {
+    const props = Object.values(propsMap)
+      .filter(p => (p.type || []).includes(type))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    setDeepLink('type/' + type);
+    document.querySelectorAll('.devdash-active').forEach(e => e.classList.remove('devdash-active'));
+    welcomeEl.hidden = true;
+    viewerEl.hidden  = false;
+    viewerPath.textContent = 'properties/' + type;
+    viewerExt.hidden = true;
+
+    const items = props.map(p =>
+      `<button class="prop-index-item" type="button" data-prop="${esc(p.name)}">` +
+        `<span class="pii-name">${esc(p.name)}</span>` +
+        `<span class="pii-desc">${esc((p.description || '').split('\n')[0].trim())}</span>` +
+      `</button>`
+    ).join('');
+
+    viewerBody.innerHTML =
+      `<div class="prop-view">` +
+        `<div class="prop-eyebrow">Type</div>` +
+        `<h2 class="prop-name">${esc(type)}</h2>` +
+        `<div class="prop-type-index">${items}</div>` +
+      `</div>`;
+
+    viewerBody.querySelectorAll('.prop-index-item[data-prop]').forEach(btn => {
+      btn.addEventListener('click', () => loadProperty(propsMap[btn.dataset.prop]));
+    });
+  }
+
   function showProperty(prop) {
     const types = (prop.type || [])
-      .map(t => `<span class="prop-type-badge">${esc(t)}</span>`)
+      .map(t => `<button class="prop-type-badge" type="button" data-type="${esc(t)}">${esc(t)}</button>`)
       .join('');
     const desc = (prop.description || '').trim();
+
+    const setsHtml   = (prop.sets   || []).length ? propRefList(prop.sets)   : '';
+    const setByHtml  = (prop.set_by || []).length ? propRefList(prop.set_by) : '';
 
     viewerBody.innerHTML =
       `<div class="prop-view">` +
@@ -535,17 +644,35 @@
         `<h2 class="prop-name">${esc(prop.name)}</h2>` +
         `<div class="prop-types">${types || ''}</div>` +
         `<div class="prop-creator">creator: ${esc(prop.creator || '—')}</div>` +
+        (setsHtml  ? `<div class="prop-rel"><span class="prop-rel-label">Sets when used</span><span class="prop-rel-list">${setsHtml}</span></div>` : '') +
+        (setByHtml ? `<div class="prop-rel"><span class="prop-rel-label">Set by</span><span class="prop-rel-list">${setByHtml}</span></div>` : '') +
         `<pre class="prop-desc">${esc(desc) || '<em>No description.</em>'}</pre>` +
+        mudLinkHtml(PROPS_PREFIX + prop.name) +
       `</div>`;
+
+    viewerBody.querySelectorAll('.prop-type-badge[data-type]').forEach(btn => {
+      btn.addEventListener('click', () => showTypeIndex(btn.dataset.type));
+    });
+    viewerBody.querySelectorAll('.prop-ref[data-prop]').forEach(btn => {
+      btn.addEventListener('click', () => loadProperty(propsMap[btn.dataset.prop]));
+    });
   }
 
   // ── Content loading ──────────────────────────────────────────────────────────
   async function loadContent(path) {
+    // Route type index
+    if (path.startsWith('type/')) {
+      showTypeIndex(path.slice(5));
+      return;
+    }
+
     // Route property lookups to the inline renderer
     if (path.startsWith(PROPS_PREFIX)) {
       const prop = propsMap[path.slice(PROPS_PREFIX.length)];
       if (prop) { loadProperty(prop); return; }
     }
+
+    setDeepLink(path);
 
     // Mark active
     document.querySelectorAll('.devdash-active')
@@ -564,7 +691,7 @@
     viewerBody.innerHTML = '<span class="devdash-loading">Loading…</span>';
 
     if (cache[path]) {
-      showContent(cache[path]);
+      showContent(cache[path], path);
       return;
     }
 
@@ -573,16 +700,16 @@
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const text = await r.text();
       cache[path] = text;
-      showContent(text);
+      showContent(text, path);
     } catch (err) {
       viewerBody.innerHTML = `<span class="devdash-err">Could not load ${esc(name)}: ${esc(String(err))}</span>`;
     }
   }
 
-  function showContent(text) {
-    viewerBody.innerHTML = looksLikeCode(text)
+  function showContent(text, path) {
+    viewerBody.innerHTML = (looksLikeCode(text)
       ? highlightLPC(text)
-      : renderDoc(text);
+      : renderDoc(text)) + mudLinkHtml(path);
   }
 
   // ── Doc renderer: color codes + heading detection + inline code blocks ───────
@@ -892,6 +1019,30 @@
   function renderHooks() {
     const el = document.getElementById('devdash-hooks');
     if (!el) return;
+
+    const section = el.closest('.devdash-rsec');
+    const head    = section && section.querySelector('.devdash-rsec-head');
+    if (head) {
+      head.classList.add('devdash-rsec-toggle');
+      head.setAttribute('role', 'button');
+      head.setAttribute('tabindex', '0');
+      const arrow = document.createElement('span');
+      arrow.className = 'devdash-rsec-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '▶';
+      head.appendChild(arrow);
+      section.setAttribute('aria-expanded', 'false');
+      el.hidden = true;
+      const toggle = () => {
+        const open = section.getAttribute('aria-expanded') === 'true';
+        section.setAttribute('aria-expanded', String(!open));
+        el.hidden = open;
+      };
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    }
 
     const frag = document.createDocumentFragment();
     HOOKS.forEach(h => {

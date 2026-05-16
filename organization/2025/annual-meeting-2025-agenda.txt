@@ -1,0 +1,39 @@
+ The annual meeting of 2025 shall be held as an online conference on Sunday, 11 May 2025 at 19:00 UTC (21:00 CEST).
+
+Please read the current bylaws.
+
+The preliminary agenda posted on 10 January 2025 has been amended with a discussion point for the open mic session, regarding new colocation or server hosting for VikingMUD.
+
+ 1.  Register members and votes present
+ 2.  Elect chair of the meeting and minute taker
+ 3.  Process annual report / accounts
+ 4.  Amendment of bylaws
+ 5.  Process received proposals
+ 6.  Determine membership dues
+ 7.  Elect the board
+ 8.  Close the meeting
+ 9.  After-meeting "open mic" session: VikingMUD's server needs a new home
+
+The board has no proposals for this annual meeting. There are no proposed amendments to the bylaws.
+
+Three board members' terms are ending, and the positions are therefore up for election/re-election for a period of two (2) years (2025-2027):
+
+    Jan (Dios)
+    Knut Erik (Knubo)
+    Thomas (Gaeius) 
+
+Of these candidates, Jan and Knut Erik have signaled that they wish to stand for reelection. In addition, and Børge (Gaia) has signaled that they wish to stand for election. Additional candidates are welcome.
+
+The following board members were elected for a two-year term in 2024, and are not standing for election until 2026:
+
+    Geir (Moreldir)
+    Matthew (Drake)
+    Odd (Kralk)
+
+As per the bylaws, anyone with a wizard (or higher) who has paid the membership (currently free-of-charge), have the right to attend, to vote, and are eligible for election. Administrators have two votes each, all other members a single vote each.
+
+The board urges any candidates who wish to serve as a board member, to
+stand for election.
+
+ On behalf of the VikingMUD organization's board,
+ Dios, Chair of the board
