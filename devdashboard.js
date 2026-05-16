@@ -151,6 +151,12 @@
   let treeNodes    = null; // div#devdash-tree-nodes
   let filterNodes  = null; // div#devdash-filter-nodes
 
+  // Promise that resolves once buildIndex() has finished
+  let resolveReady;
+  const readyPromise = new Promise(res => { resolveReady = res; });
+
+  let isPopState = false;
+
   // ── DOM refs (resolved in init) ─────────────────────────────────────────────
   let searchEl, statusEl, viewerEl, welcomeEl, viewerBody, viewerPath, viewerExt, countEl;
 
@@ -177,6 +183,20 @@
     searchEl.addEventListener('input',   () => handleSearch(searchEl.value));
     searchEl.addEventListener('keydown', onSearchKey);
     document.addEventListener('keydown', onDocKey);
+    window.addEventListener('popstate', onPopState);
+  }
+
+  function onPopState() {
+    isPopState = true;
+    const p = new URLSearchParams(location.search).get('p') || '';
+    if (p) {
+      loadContent(p);
+    } else {
+      document.querySelectorAll('.devdash-active').forEach(e => e.classList.remove('devdash-active'));
+      welcomeEl.hidden = false;
+      viewerEl.hidden  = true;
+    }
+    isPopState = false;
   }
 
   // ── Index building ──────────────────────────────────────────────────────────
@@ -207,6 +227,7 @@
     // Load properties alongside wizdoc content, then handle any deep link
     await fetchAndRenderProperties();
     processDeepLink();
+    resolveReady();
   }
 
   function setStatus(msg) {
@@ -414,11 +435,17 @@
   // ── Deep linking ────────────────────────────────────────────────────────────
   function processDeepLink() {
     const p = new URLSearchParams(location.search).get('p');
-    if (p) loadContent(p);
+    if (p && !p.startsWith('objtype/')) loadContent(p);
   }
 
   function setDeepLink(path) {
-    history.replaceState(null, '', '?p=' + encodeURIComponent(path));
+    const url = '?p=' + encodeURIComponent(path);
+    if (location.search === url) return;
+    if (isPopState) {
+      history.replaceState(null, '', url);
+    } else {
+      history.pushState(null, '', url);
+    }
   }
 
   // ── MUD in-game command ──────────────────────────────────────────────────────
@@ -629,6 +656,7 @@
     viewerBody.querySelectorAll('.prop-index-item[data-prop]').forEach(btn => {
       btn.addEventListener('click', () => loadProperty(propsMap[btn.dataset.prop]));
     });
+    window.devdashObjects?.linkifyTypes(viewerBody);
   }
 
   function showProperty(prop) {
@@ -658,6 +686,7 @@
     viewerBody.querySelectorAll('.prop-ref[data-prop]').forEach(btn => {
       btn.addEventListener('click', () => loadProperty(propsMap[btn.dataset.prop]));
     });
+    window.devdashObjects?.linkifyTypes(viewerBody);
   }
 
   // ── Content loading ──────────────────────────────────────────────────────────
@@ -665,6 +694,12 @@
     // Route type index
     if (path.startsWith('type/')) {
       showTypeIndex(path.slice(5));
+      return;
+    }
+
+    // Route object type reference
+    if (path.startsWith('objtype/')) {
+      window.devdashObjects?.showTypeDetail(path.slice(8));
       return;
     }
 
@@ -712,6 +747,7 @@
     viewerBody.innerHTML = (looksLikeCode(text)
       ? highlightLPC(text)
       : renderDoc(text)) + mudLinkHtml(path);
+    window.devdashObjects?.linkifyTypes(viewerBody);
   }
 
   // ── Doc renderer: color codes + heading detection + inline code blocks ───────
@@ -1059,6 +1095,41 @@
     });
     el.appendChild(frag);
   }
+
+  // ── Public API for devdash-objects.js ────────────────────────────────────────
+  window.devdash = {
+    openHook:     (hookName)  => loadContent('hooks/' + hookName),
+    openProperty: (propName)  => { const p = propsMap[propName]; if (p) loadProperty(p); },
+    getPropsForCategories: (cats) =>
+      Object.values(propsMap).filter(p => (p.type || []).some(t => cats.includes(t))),
+    revealViewer: (deepPath, pathLabel) => {
+      setDeepLink(deepPath);
+      document.querySelectorAll('.devdash-active').forEach(e => e.classList.remove('devdash-active'));
+      welcomeEl.hidden = true;
+      viewerEl.hidden  = false;
+      viewerPath.textContent = pathLabel;
+      viewerExt.hidden = true;
+    },
+    ready: readyPromise,
+    addToSearch: (entries) => {
+      allFiles.push(...entries);
+      allFiles.sort((a, b) => a.name.localeCompare(b.name));
+      const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+      if (q) {
+        filtered = allFiles.filter(f =>
+          f.name.toLowerCase().includes(q) || f.section.toLowerCase().includes(q)
+        );
+        renderFilterList();
+      } else {
+        filtered = allFiles;
+      }
+      updateCount();
+    },
+    appendTreeBranch: (el) => {
+      if (treeNodes) treeNodes.appendChild(el);
+    },
+    esc,
+  };
 
   // ── Bootstrap ────────────────────────────────────────────────────────────────
   if (document.readyState === 'loading') {
