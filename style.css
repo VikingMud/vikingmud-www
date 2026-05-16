@@ -523,6 +523,11 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
 .legal-dl dd{margin:6px 0 0;font-size:14.5px;color:var(--ink-2);line-height:1.6;
   border-left:2px solid var(--line);padding-left:14px}
 .accent-link{color:var(--accent)}
+.mt-24{margin-top:24px}
+.mt-36{margin-top:36px}
+.ol-gap{margin:16px 0}
+.org-h{margin-top:clamp(36px,5vw,56px)}
+.org-tbl{margin:24px 0}
 
 /* ── Guide: quests CTA block ────────────────────────────────────────── */
 .quest-cta-block{
