@@ -20,7 +20,7 @@
 
   // ── DOM refs ─────────────────────────────────────────────────────────────────
 
-  let fab, panel, output, input;
+  let fab, panel, output, input, closeBtn;
 
   // ── Init ─────────────────────────────────────────────────────────────────────
 
@@ -46,7 +46,7 @@
     const bar = document.createElement('div');
     bar.id = 'help-titlebar';
     bar.innerHTML = '<span>Viking MUD · Help</span>';
-    const closeBtn = document.createElement('button');
+    closeBtn = document.createElement('button');
     closeBtn.id = 'help-close-btn';
     closeBtn.setAttribute('aria-label', 'Close help');
     closeBtn.textContent = '×';
@@ -71,6 +71,7 @@
     input.setAttribute('autocapitalize', 'off');
     input.setAttribute('spellcheck', 'false');
     input.setAttribute('placeholder', 'type help to start');
+    input.setAttribute('aria-label', 'Command input');
     row.append(prompt, input);
 
     panel.append(bar, output, row);
@@ -87,6 +88,16 @@
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) closePanel();
+    });
+    panel.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !isOpen) return;
+      const focusable = [closeBtn, input];
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
   }
 
@@ -110,6 +121,7 @@
     panel.hidden = true;
     fab.classList.remove('active');
     fab.setAttribute('aria-expanded', 'false');
+    fab.focus();
   }
 
   // ── Output helpers ────────────────────────────────────────────────────────────

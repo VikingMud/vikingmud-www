@@ -225,7 +225,7 @@
         fnHtml +=
           `<div class="typeref-fn-group">` +
             `<span class="typeref-fn-src">${esc(srcId)}</span>` +
-            fns.map(f => `<code class="typeref-fn">${esc(f)}</code>`).join('') +
+            [...fns].sort().map(f => `<code class="typeref-fn">${esc(f)}</code>`).join('') +
           `</div>`;
       });
     } else {
