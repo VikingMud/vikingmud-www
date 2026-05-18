@@ -326,6 +326,7 @@
       return;
     }
 
+    meta.types.sort((a, b) => a.id.localeCompare(b.id));
     meta.types.forEach(t => { typeMap[t.id] = t; });
     meta.types.forEach(t => {
       (t.inherits || []).forEach(parentId => {

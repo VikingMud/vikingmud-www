@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viking MUD — Boards</title>
+<meta name="description" content="Read the latest notes from Viking MUD's in-game bulletin boards — announcements, world updates, and community discussion.">
+<meta name="author" content="Viking MUD Administration">
+<link rel="canonical" href="https://www.vikingmud.org/boards.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Viking MUD">
+<meta property="og:url" content="https://www.vikingmud.org/boards.html">
+<meta property="og:title" content="Viking MUD — Boards">
+<meta property="og:description" content="Read the latest notes from Viking MUD's in-game bulletin boards.">
+<meta property="og:image" content="https://www.vikingmud.org/yggdrasil.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viking MUD — Boards">
+<meta name="twitter:description" content="Read the latest notes from Viking MUD's in-game bulletin boards.">
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-boards">
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1990 · Oslo</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+      <a href="organization/">Org</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Loading…</span>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="boards-page-header">
+  <div class="wrap boards-header-inner">
+    <div class="boards-header-left">
+      <span class="boards-header-eyebrow" aria-hidden="true">Community</span>
+      <h1 class="boards-header-title">Boards</h1>
+      <span class="boards-header-sub">The bulletin boards of the realm. Post in-game with <span class="code">bn</span>.</span>
+    </div>
+    <div class="boards-header-hint" aria-hidden="true">
+      <span class="boards-kbd">↑ ↓</span> navigate
+      <span class="boards-kbd">↵</span> open
+      <span class="boards-kbd">⇥</span> detail
+    </div>
+  </div>
+</div>
+
+<!-- ── Boards shell ───────────────────────────────────────────────────── -->
+<div class="boards-shell" id="boards-shell">
+
+  <!-- Board selector tabs -->
+  <div class="boards-tabs-bar">
+    <div class="wrap boards-tabs-wrap">
+      <div
+        class="boards-tabs"
+        role="tablist"
+        aria-label="Select a board"
+        id="board-tabs"
+      ></div>
+      <span class="boards-thread-count" id="boards-thread-count" aria-live="polite" aria-atomic="true"></span>
+    </div>
+  </div>
+
+  <!-- Split panel -->
+  <div class="boards-layout" id="boards-layout">
+
+    <!-- Left: thread list -->
+    <div class="boards-left" id="boards-left">
+      <ul
+        class="thread-list"
+        role="listbox"
+        aria-label="Threads on selected board"
+        id="thread-list"
+        tabindex="0"
+      ></ul>
+    </div>
+
+    <!-- Right: thread reader -->
+    <div class="boards-right" id="boards-right">
+
+      <div class="boards-empty" id="boards-empty">
+        <span class="boards-empty-rune" aria-hidden="true">ᚱ</span>
+        <p>Select a thread to read.</p>
+        <p class="boards-empty-hint">
+          Use <kbd>↑</kbd><kbd>↓</kbd> in the list, <kbd>↵</kbd> to open,
+          <kbd>Tab</kbd> to reach the detail.
+        </p>
+      </div>
+
+      <div
+        class="thread-detail"
+        id="thread-detail"
+        role="region"
+        aria-label="Thread contents"
+        aria-live="polite"
+        tabindex="-1"
+        hidden
+      ></div>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap foot-grid">
+    <a class="foot-back accent-link" href="index.html">← Home</a>
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001/2002</span>
+  </div>
+</footer>
+
+<script src="boards.js" defer></script>
+</body>
+</html>
