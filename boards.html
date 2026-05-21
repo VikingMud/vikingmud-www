@@ -61,7 +61,6 @@
     <div class="boards-header-hint" aria-hidden="true">
       <span class="boards-kbd">↑ ↓</span> navigate
       <span class="boards-kbd">↵</span> open
-      <span class="boards-kbd">⇥</span> detail
     </div>
   </div>
 </div>
@@ -77,6 +76,7 @@
         role="tablist"
         aria-label="Select a board"
         id="board-tabs"
+        tabindex="-1"
       ></div>
       <span class="boards-thread-count" id="boards-thread-count" aria-live="polite" aria-atomic="true"></span>
     </div>
@@ -86,18 +86,17 @@
   <div class="boards-layout" id="boards-layout">
 
     <!-- Left: thread list -->
-    <div class="boards-left" id="boards-left">
+    <div class="boards-left" id="boards-left" tabindex="-1">
       <ul
         class="thread-list"
         role="listbox"
         aria-label="Threads on selected board"
         id="thread-list"
-        tabindex="0"
       ></ul>
     </div>
 
     <!-- Right: thread reader -->
-    <div class="boards-right" id="boards-right">
+    <div class="boards-right" id="boards-right" tabindex="-1">
 
       <div class="boards-empty" id="boards-empty">
         <span class="boards-empty-rune" aria-hidden="true">ᚱ</span>

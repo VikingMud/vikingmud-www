@@ -91,11 +91,14 @@
     if (!el) return;
     el.innerHTML = '';
     boards.forEach((b, i) => {
+      const active = i === currentBoard;
       const btn = document.createElement('button');
-      btn.className = 'boards-tab' + (i === currentBoard ? ' active' : '');
+      btn.className = 'boards-tab' + (active ? ' active' : '');
       btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-selected', String(i === currentBoard));
+      btn.setAttribute('aria-selected', String(active));
       btn.setAttribute('type', 'button');
+      // Only the active tab is in the tab sequence; others are arrow-key only
+
       btn.textContent = b.name;
       btn.addEventListener('click', () => switchBoard(i));
       el.appendChild(btn);
@@ -133,7 +136,7 @@
       li.className  = 'thread-item' + (sel ? ' selected' : '');
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', String(sel));
-      li.setAttribute('tabindex', '-1');
+      li.setAttribute('tabindex', sel ? '0' : '-1');
       li.id         = 'ti-' + i;
       li.dataset.idx = i;
 
@@ -212,9 +215,9 @@
       `</div>` +
       `<div class="notes-list">${notesHtml}</div>` +
       `<nav class="thread-pager" aria-label="Thread navigation">` +
-        prevBtn +
-        `<span class="pager-pos">${currentThread + 1} / ${total}</span>` +
         nextBtn +
+        `<span class="pager-pos">${currentThread + 1} / ${total}</span>` +
+        prevBtn +
       `</nav>`;
 
     detail.querySelector('#btn-prev')?.addEventListener('click', () => selectThread(currentThread - 1));
@@ -230,7 +233,13 @@
     renderTabs();
     renderThreadList();
     renderDetail();
-    document.getElementById('thread-list')?.focus();
+    // Auto-select first thread on board switch
+    if (boards[currentBoard]?.threads.length) {
+      currentThread = 0;
+      renderThreadList();
+      renderDetail();
+    }
+    document.getElementById('ti-0')?.focus();
   }
 
   function selectThread(idx) {
@@ -238,11 +247,12 @@
     if (idx < 0 || idx >= threads.length) return;
     currentThread = idx;
 
-    // Update list UI without full re-render
+    // Update list UI without full re-render (roving tabindex)
     const list = document.getElementById('thread-list');
     list?.querySelectorAll('.thread-item').forEach((el, i) => {
       el.classList.toggle('selected', i === idx);
       el.setAttribute('aria-selected', String(i === idx));
+      el.setAttribute('tabindex', i === idx ? '0' : '-1');
     });
     list?.setAttribute('aria-activedescendant', 'ti-' + idx);
 
@@ -263,59 +273,48 @@
     const list = document.getElementById('thread-list');
     if (!list) return;
 
+    // Keyboard events bubble up from focused thread items
     list.addEventListener('keydown', e => {
       const threads = boards[currentBoard]?.threads || [];
       const cur     = currentThread < 0 ? -1 : currentThread;
 
       switch (e.key) {
-        case 'ArrowDown':
+        case 'ArrowDown': {
           e.preventDefault();
-          selectThread(cur < 0 ? 0 : Math.min(cur + 1, threads.length - 1));
+          const next = cur < 0 ? 0 : Math.min(cur + 1, threads.length - 1);
+          selectThread(next);
+          document.getElementById('ti-' + next)?.focus();
           break;
-        case 'ArrowUp':
+        }
+        case 'ArrowUp': {
           e.preventDefault();
-          selectThread(cur < 0 ? 0 : Math.max(cur - 1, 0));
+          const prev = cur < 0 ? 0 : Math.max(cur - 1, 0);
+          selectThread(prev);
+          document.getElementById('ti-' + prev)?.focus();
           break;
-        case 'Home':
+        }
+        case 'Home': {
           e.preventDefault();
           selectThread(0);
+          document.getElementById('ti-0')?.focus();
           break;
-        case 'End':
+        }
+        case 'End': {
           e.preventDefault();
-          selectThread(threads.length - 1);
+          const last = threads.length - 1;
+          selectThread(last);
+          document.getElementById('ti-' + last)?.focus();
           break;
+        }
         case 'Enter':
-        case ' ':
+        case ' ': {
           e.preventDefault();
           if (cur < 0 && threads.length) selectThread(0);
-          // Move focus into the detail panel
-          const detail = document.getElementById('thread-detail');
-          if (detail && !detail.hidden) detail.focus();
+          document.getElementById('thread-detail')?.focus();
           break;
+        }
       }
     });
-
-    // Tab-selector keyboard: left/right arrows between board tabs
-    const tabs = document.getElementById('board-tabs');
-    if (tabs) {
-      tabs.addEventListener('keydown', e => {
-        const btns = [...tabs.querySelectorAll('.boards-tab')];
-        const focused = document.activeElement;
-        const fi = btns.indexOf(focused);
-        if (fi === -1) return;
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          const next = (fi + 1) % btns.length;
-          btns[next].focus();
-          switchBoard(next);
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const prev = (fi - 1 + btns.length) % btns.length;
-          btns[prev].focus();
-          switchBoard(prev);
-        }
-      });
-    }
   }
 
   // ── URL hash (deep-link support: #b0t3 = board 0, thread 3) ──────────────────

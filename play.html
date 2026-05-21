@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Viking MUD — Play</title>
+  <link rel="icon" href="yggdrasil.png">
+  <link rel="stylesheet" href="lib/xterm.css">
+  <link rel="stylesheet" href="lib/xterm-dynamic.css" id="xterm-dyn">
+  <link rel="stylesheet" href="play.css">
+</head>
+<body>
+<div id="page">
+
+  <header class="play-header">
+    <a class="brand" href="/">
+      <div class="brand-mark">ᚢ</div>
+      <div class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1990 · Oslo</span>
+      </div>
+    </a>
+
+    <div class="conn-status">
+      <div class="conn-dot" id="dot" title="disconnected"></div>
+      <span id="conn-label">connecting…</span>
+    </div>
+
+    <a class="back-link" href="/">vikingmud.org</a>
+  </header>
+
+  <div id="term-box"></div>
+
+  <div id="bar">
+    <input id="cmd" type="text" placeholder="Enter command…"
+           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <button id="sendbtn">Send</button>
+  </div>
+
+</div>
+
+<script src="lib/xterm.min.js"></script>
+<script src="lib/xterm-addon-fit.min.js"></script>
+<script src="play.js"></script>
+</body>
+</html>
