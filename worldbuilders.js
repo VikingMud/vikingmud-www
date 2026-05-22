@@ -128,7 +128,7 @@
       ? (c.minYear === c.maxYear ? String(c.minYear) : c.minYear + '–' + c.maxYear)
       : '';
 
-    const sorted = c.works.slice().sort((a, b) => parseTimestamp(a.date) - parseTimestamp(b.date));
+    const sorted = c.works.slice().sort((a, b) => parseTimestamp(b.date) - parseTimestamp(a.date));
 
     const entries = sorted.map(w => {
       const dateStr = w.date ? formatDate(w.date) : '';
@@ -161,6 +161,7 @@
       history.back();
     });
 
+    document.querySelector('.wb-header').hidden = true;
     document.querySelector('.wb-filter-bar').hidden = true;
     document.querySelector('.wb-grid-section').hidden = true;
     detail.hidden = false;
@@ -169,6 +170,7 @@
 
   function hideDetail() {
     document.getElementById('wb-detail').hidden = true;
+    document.querySelector('.wb-header').hidden = false;
     document.querySelector('.wb-filter-bar').hidden = false;
     document.querySelector('.wb-grid-section').hidden = false;
     window.scrollTo(0, 0);
@@ -253,9 +255,9 @@
         { n: data.length,     l: 'Contributions' },
         { n: allYears.length ? Math.min(...allYears) + '–' + Math.max(...allYears) : '–', l: 'Years active' },
       ].map(s =>
-        '<div class="quest-stat">'
-        + '<span class="quest-stat-n">' + s.n + '</span>'
-        + '<span class="quest-stat-l">' + esc(s.l) + '</span>'
+        '<div class="stat-item">'
+        + '<span class="stat-value">' + s.n + '</span>'
+        + '<span class="stat-label">' + esc(s.l) + '</span>'
         + '</div>'
       ).join('');
 

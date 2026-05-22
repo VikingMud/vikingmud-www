@@ -210,7 +210,7 @@ function renderNews(items) {
 
 async function loadNews() {
   try {
-    const res = await fetch('news.txt?t=' + Date.now());
+    const res = await fetch('/news.txt?t=' + Date.now());
     if (!res.ok) return;
     renderNews(parseNews(await res.text()));
   } catch (_) {}
@@ -226,7 +226,7 @@ function briefUptime(s) {
 
 async function refreshLive() {
   try {
-    const res = await fetch('webinfo.json?t=' + Date.now());
+    const res = await fetch('/webinfo.json?t=' + Date.now());
     if (!res.ok) return;
     const { usercount, uptime } = await res.json();
     const brief = briefUptime(uptime);
@@ -263,8 +263,8 @@ async function loadArchList() {
       .map(([name]) => {
         const title = LEVEL_TITLE[data.levels[name]] || `Level ${data.levels[name]}`;
         const depts = (byPerson[name] || [])
-          .sort((a, b) => DEPT_ORDER.indexOf(a) - DEPT_ORDER.indexOf(b))
           .map(d => DEPT_LABEL[d] || d)
+          .sort((a, b) => a.localeCompare(b))
           .join(' · ');
         const display = name.charAt(0).toUpperCase() + name.slice(1);
         return `<tr><td>${title}</td><td>${display}</td><td>${depts}</td></tr>`;

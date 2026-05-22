@@ -173,7 +173,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;
   font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
   border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);
-  cursor:default;transition:transform .15s ease, background .15s ease}
+  cursor:pointer;transition:transform .15s ease, background .15s ease}
 .btn:hover{transform:translateY(-1px);background:transparent;color:var(--accent)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent}
@@ -440,38 +440,42 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
 .rank-table td:first-child{color:var(--ink);white-space:nowrap}
 .rank-table td:nth-child(2){color:var(--accent);font-weight:500}
 
-/* ── RC5 page ──────────────────────────────────────────────────────── */
-.rc5-statbar{
+/* ── Stat bar & display ─────────────────────────────────────────────── */
+.stat-bar{
   background:var(--surface);border-bottom:1px solid var(--line);
   padding:clamp(24px,3vw,36px) 0;
 }
-.rc5-stats{display:flex;gap:clamp(32px,6vw,80px);flex-wrap:wrap}
-.rc5-stat{display:flex;flex-direction:column;gap:6px}
-.rc5-n{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:500;
+.stat-group{display:flex;gap:clamp(32px,6vw,80px);flex-wrap:wrap}
+.quest-header .stat-group,.wb-header .stat-group{
+  margin-top:40px;padding-top:24px;border-top:1px solid var(--line);
+  gap:clamp(32px,6vw,64px);
+}
+.stat-item{display:flex;flex-direction:column;gap:6px}
+.stat-value{font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:500;
   color:var(--accent);line-height:1}
-.rc5-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+.stat-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ink-3)}
-.rc5-prize-table{
+.data-table{
   border:1px solid var(--line);margin:24px 0;
   display:flex;flex-direction:column;
 }
-.rc5-prize-row{
+.data-row{
   display:flex;justify-content:space-between;align-items:baseline;
   padding:14px 20px;border-bottom:1px solid var(--line-2);
   font-size:14.5px;color:var(--ink-2);gap:24px;
 }
-.rc5-prize-row:last-child{border-bottom:0}
-.rc5-prize-row b{font-family:var(--mono);font-size:13px;color:var(--accent);
+.data-row:last-child{border-bottom:0}
+.data-row b{font-family:var(--mono);font-size:13px;color:var(--accent);
   white-space:nowrap;font-weight:500}
-.rc5-note{font-size:12.5px;color:var(--ink-3);font-style:italic}
-.rc5-steps{
+.note-small{font-size:12.5px;color:var(--ink-3);font-style:italic}
+.steps-list{
   margin:0;padding:0 0 0 1.4em;
   display:flex;flex-direction:column;gap:20px;
   font-size:15px;line-height:1.7;color:var(--ink-2);
 }
-.rc5-steps li::marker{color:var(--accent);font-family:var(--mono);font-size:12px}
-.rc5-steps strong{color:var(--ink)}
-.rc5-aside{
+.steps-list li::marker{color:var(--accent);font-family:var(--mono);font-size:12px}
+.steps-list strong{color:var(--ink)}
+.text-aside{
   margin:10px 0 0;font-size:13px;color:var(--ink-3);
   border-left:2px solid var(--accent-2);padding-left:14px;
   font-style:italic;max-width:58ch;
@@ -539,47 +543,47 @@ footer{padding:48px 0 36px;border-top:1px solid var(--line);margin-top:var(--gap
 .org-h{margin-top:clamp(36px,5vw,56px)}
 .org-tbl{margin:24px 0}
 
-/* ── Guide: quests CTA block ────────────────────────────────────────── */
-.quest-cta-block{
+/* ── CTA block ──────────────────────────────────────────────────────── */
+.cta-block{
   margin-top:32px;border:1px solid var(--line);background:var(--bg-2);
 }
-.quest-cta-inner{
+.cta-inner{
   display:flex;align-items:center;gap:20px;padding:clamp(18px,3vw,28px);
   flex-wrap:wrap;
 }
-.quest-cta-rune{
+.cta-rune{
   font-family:var(--serif);font-size:48px;font-weight:600;
   color:var(--accent);line-height:1;flex-shrink:0;
   text-shadow:0 0 24px color-mix(in oklab, var(--accent) 30%, transparent);
 }
-.quest-cta-label{
+.cta-label{
   font-family:var(--serif);font-weight:500;font-size:18px;
   text-transform:uppercase;letter-spacing:.04em;
   color:var(--ink);margin:0 0 4px;
 }
-.quest-cta-sub{
+.cta-sub{
   font-size:13.5px;line-height:1.55;color:var(--ink-2);margin:0;max-width:none;
 }
-.quest-cta-link{
+.cta-link{
   margin-left:auto;flex-shrink:0;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--accent);
   border:1px solid var(--accent);padding:12px 20px;
   transition:background .15s ease,color .15s ease;white-space:nowrap;
 }
-.quest-cta-link:hover{background:var(--accent);color:var(--accent-ink)}
-.quest-cta-continue{
+.cta-link:hover{background:var(--accent);color:var(--accent-ink)}
+.cta-continue{
   font-family:var(--mono);font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-3);
   padding:10px clamp(18px,3vw,28px);
   border-top:1px solid var(--line-2);margin:0;
 }
-.quest-cta-continue a{
+.cta-continue a{
   color:var(--accent);
   border-bottom:1px solid color-mix(in oklab, var(--accent) 40%, transparent);
   transition:color .15s,border-color .15s;
 }
-.quest-cta-continue a:hover{color:var(--ink);border-color:var(--ink)}
+.cta-continue a:hover{color:var(--ink);border-color:var(--ink)}
 
 /* ── Guide: path chooser ────────────────────────────────────────────── */
 .guide-paths{
@@ -843,10 +847,6 @@ a.guide-path-card:hover{background:var(--surface)}
 .quest-header{padding:clamp(48px,8vh,96px) 0 clamp(40px,6vh,72px);border-bottom:1px solid var(--line)}
 .quest-header .eyebrow{margin-bottom:18px}
 .quest-header .h-1{margin:18px 0 24px}
-.quest-stats{display:flex;gap:clamp(32px,6vw,64px);flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
-.quest-stat{display:flex;flex-direction:column;gap:4px}
-.quest-stat-n{font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:500;color:var(--accent);line-height:1}
-.quest-stat-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
 .quest-breadcrumb{padding:14px 0;border-bottom:1px solid var(--line);background:var(--bg-2)}
 .quest-breadcrumb .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .quest-bc-link{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:inline-flex;align-items:center;gap:8px;transition:color .15s ease}

@@ -65,9 +65,9 @@
         { n: data.needed_qp.toLocaleString(),   l: 'QP needed for wizard' },
       ];
       statsEl.innerHTML = items.map(s =>
-        `<div class="quest-stat">
-  <span class="quest-stat-n">${s.n}</span>
-  <span class="quest-stat-l">${s.l}</span>
+        `<div class="stat-item">
+  <span class="stat-value">${s.n}</span>
+  <span class="stat-label">${s.l}</span>
 </div>`
       ).join('');
 
