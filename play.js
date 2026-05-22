@@ -83,6 +83,7 @@
     var val = cmdEl.value;
     if (ws.readyState !== WebSocket.OPEN) return;
     ws.send(val + '\n');
+    term.write(val + '\r\n');
     if (val.length > 0) {
       history.unshift(val);
       if (history.length > 200) history.pop();

@@ -68,7 +68,7 @@
           saga that has been running every day since 1991.
         </p>
         <div class="hero-cta">
-          <a href="#connect" class="btn">Enter the realm <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="play.html" class="btn">Play in your browser <span class="arrow" aria-hidden="true">→</span></a>
           <a href="#intro" class="btn btn-ghost">What is a MUD?</a>
         </div>
         <div class="hero-meta">
@@ -409,27 +409,36 @@
   </div>
 </section>
 
+<!-- ── World Builders ─────────────────────────────────────────────────── -->
+<section id="worldbuilders" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04<span>World Builders</span></div>
+      <h2 class="sec-title">100+ wizards.<br>One world built.</h2>
+    </div>
+    <p class="lede" style="max-width:52ch;margin-bottom:32px">Every area, guild, quest and event was created by a volunteer wizard. Browse the full roster and explore each creator's timeline of contributions.</p>
+    <a href="worldbuilders.html" class="btn btn-ghost">Browse world builders <span class="arrow">→</span></a>
+  </div>
+</section>
+
 <!-- ── Connect ────────────────────────────────────────────────────────── -->
 <section id="connect" class="reveal">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">04<span>Connect</span></div>
-      <h2 class="sec-title">Three keystrokes from now,<br>you are inside.</h2>
+      <div class="sec-num">05<span>Connect</span></div>
+      <h2 class="sec-title">No install needed.<br>Three ways in.</h2>
     </div>
+
+    <!-- Primary: browser -->
     <div class="connect">
       <div class="col col-18">
         <span class="eyebrow">Quickest path</span>
-        <h3 class="h-2">Open a terminal.</h3>
-        <div class="conn-cmd">
-          <span class="conn-cmd-text">$ telnet connect.vikingmud.org 2001</span>
-          <button class="copy" id="copy-btn" aria-label="Copy telnet command">Copy</button>
-        </div>
+        <h3 class="h-2">Play in your browser.</h3>
         <p class="body body-mt">
-          On Windows? Use PuTTY or any modern MUD client. We recommend
-          Mudlet — it's free, scriptable, and handles colour correctly.
+          No download, no configuration. Click once and you are inside the realm.
         </p>
         <div class="hero-cta">
-          <a href="https://www.mudlet.org/" class="btn btn-ghost" target="_blank" rel="noopener">Download Mudlet <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (opens in new tab)</span></a>
+          <a href="play.html" class="btn">Open browser client <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="conn-list">
@@ -442,10 +451,39 @@
         <div class="ln"><span>FIRST BOOT</span><b>11 jul 1991</b></div>
       </div>
     </div>
+
+    <!-- Secondary: client + telnet -->
+    <div class="connect-row">
+      <div class="connect-opt">
+        <span class="eyebrow">Best experience</span>
+        <h3 class="h-3">Use a MUD client.</h3>
+        <p class="body">
+          Triggers, aliases, scripting, and full colour support.
+          Mudlet is free, open-source, and works on Windows, macOS, and Linux.
+          Enable SSL/TLS in your client for an encrypted connection.
+        </p>
+        <div class="conn-cmd">
+          <span class="conn-cmd-text">connect.vikingmud.org · port 2002 · secure</span>
+        </div>
+        <div class="hero-cta">
+          <a href="https://www.mudlet.org/" class="btn btn-ghost" target="_blank" rel="noopener">Download Mudlet <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+      </div>
+      <div class="connect-opt">
+        <span class="eyebrow">Fallback</span>
+        <h3 class="h-3">Open a terminal.</h3>
+        <p class="body">Already have a terminal? Telnet straight in — no client required.</p>
+        <div class="conn-cmd">
+          <span class="conn-cmd-text">$ telnet connect.vikingmud.org 2001</span>
+          <button class="copy" id="copy-btn" aria-label="Copy telnet command">Copy</button>
+        </div>
+      </div>
+    </div>
+
     <div class="connect-newbie">
       <span class="eyebrow">First time?</span>
       <ol class="newbie-steps">
-        <li>Connect using the command above, or download <a href="https://www.mudlet.org/" target="_blank" rel="noopener" class="accent-link">Mudlet<span class="sr-only"> (opens in new tab)</span></a> for a richer experience</li>
+        <li>Open the <a href="play.html" class="accent-link">in-browser client</a> for the quickest start, or download <a href="https://www.mudlet.org/" target="_blank" rel="noopener" class="accent-link">Mudlet<span class="sr-only"> (opens in new tab)</span></a> for the best experience</li>
         <li>Type any name at the prompt. If you see <span class="code">New player.</span> enter a password to claim it</li>
         <li>Type <span class="code">help rules</span> to orient yourself, then <span class="code">north</span> to enter the world</li>
       </ol>
@@ -458,7 +496,7 @@
 <section id="community" class="reveal">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">05<span>Community</span></div>
+      <div class="sec-num">06<span>Community</span></div>
       <h2 class="sec-title">A small village,<br>thirty-five years deep.</h2>
     </div>
     <div class="links-grid">
@@ -510,7 +548,7 @@
 <section id="admin" class="reveal">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">06<span>Administration</span></div>
+      <div class="sec-num">07<span>Administration</span></div>
       <h2 class="sec-title">Who keeps<br>the realm running.</h2>
     </div>
     <div class="admin-grid">
