@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="midnight" data-density="regular">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Viking MUD — Quest List</title>
 <meta name="description" content="Browse all quests available on Viking MUD. Filter by difficulty and find your next adventure.">
 <meta name="author" content="Viking MUD Administration">
@@ -57,7 +57,7 @@
     <span class="eyebrow">Viking MUD</span>
     <h1 class="h-1">Quest list.</h1>
     <p class="lede">Every quest available to mortals — from five-minute puzzles to sprawling multi-hour epics. Start at the low numbers and work your way up.</p>
-    <div class="stat-group" id="quest-stats" aria-label="Quest statistics"></div>
+    <div class="stat-group" id="quest-stats" role="group" aria-label="Quest statistics"></div>
   </div>
 </div>
 
@@ -65,13 +65,13 @@
   <div class="wrap">
     <div class="quest-filter-inner">
       <input type="search" class="quest-search" id="quest-search"
-             placeholder="Search by name or hint…" aria-label="Search quests" autocomplete="off" />
+             placeholder="Search by name or hint…" aria-label="Search quests" autocomplete="off">
       <div class="quest-filter-btns" role="group" aria-label="Filter by difficulty">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="easy">Easy</button>
-        <button class="filter-btn" data-filter="medium">Medium</button>
-        <button class="filter-btn" data-filter="hard">Hard</button>
-        <button class="filter-btn" data-filter="epic">Epic</button>
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="easy">Easy</button>
+        <button type="button" class="filter-btn" data-filter="medium">Medium</button>
+        <button type="button" class="filter-btn" data-filter="hard">Hard</button>
+        <button type="button" class="filter-btn" data-filter="epic">Epic</button>
       </div>
       <span class="quest-count" id="quest-count" aria-live="polite" aria-atomic="true"></span>
     </div>
@@ -80,7 +80,7 @@
 
 <div class="quest-grid-section">
   <div class="wrap">
-    <div class="quest-grid" id="quest-grid" aria-label="Quest list">
+    <div class="quest-grid" id="quest-grid">
       <div class="quest-loading">Loading quests…</div>
     </div>
   </div>

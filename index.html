@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="midnight" data-density="regular">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Viking MUD — Home</title>
 <meta name="description" content="Viking MUD — a free, text-based multi-user roleplaying game running since 1991. Connect via telnet or a MUD client and explore a living Norse world shaped by 35 years of volunteer wizards.">
 <meta name="author" content="Viking MUD Administration">
@@ -101,7 +101,7 @@
         described in the guide.
       </p>
       <div class="demo-stage">
-        <button id="demo-play-btn" class="demo-play-btn" aria-describedby="demo-sr-hint">
+        <button type="button" id="demo-play-btn" class="demo-play-btn" aria-describedby="demo-sr-hint">
           <span aria-hidden="true">▶</span> Play demo
         </button>
         <div class="term" aria-hidden="true">
@@ -179,7 +179,7 @@
       <div class="sec-num">02<span>News</span></div>
       <h2 class="sec-title">Dispatches from the realm.</h2>
     </div>
-    <div class="news-grid" id="news-grid" aria-label="Latest news items" aria-live="polite"></div>
+    <section class="news-grid" id="news-grid" aria-label="Latest news items" aria-live="polite"></section>
   </div>
 </section>
 
@@ -416,7 +416,7 @@
       <div class="sec-num">04<span>World Builders</span></div>
       <h2 class="sec-title">100+ wizards.<br>One world built.</h2>
     </div>
-    <p class="lede" style="max-width:52ch;margin-bottom:32px">Every area, guild, quest and event was created by a volunteer wizard. Browse the full roster and explore each creator's timeline of contributions.</p>
+    <p class="lede lede-narrow">Every area, guild, quest and event was created by a volunteer wizard. Browse the full roster and explore each creator's timeline of contributions.</p>
     <a href="worldbuilders.html" class="btn btn-ghost">Browse world builders <span class="arrow">→</span></a>
   </div>
 </section>
@@ -475,7 +475,7 @@
         <p class="body">Already have a terminal? Telnet straight in — no client required.</p>
         <div class="conn-cmd">
           <span class="conn-cmd-text">$ telnet connect.vikingmud.org 2001</span>
-          <button class="copy" id="copy-btn" aria-label="Copy telnet command">Copy</button>
+          <button type="button" class="copy" id="copy-btn" aria-label="Copy telnet command">Copy</button>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="midnight" data-density="regular">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Viking MUD — World Builders</title>
 <meta name="description" content="Meet the creators who built the world of Viking MUD — wizards who shaped areas, guilds, quests, and events since 1991.">
 <meta name="author" content="Viking MUD Administration">
@@ -50,7 +50,7 @@
     <span class="eyebrow">Viking MUD</span>
     <h1 class="h-1">World Builders.</h1>
     <p class="lede">The wizards who shaped this world — areas, guilds, quests, events, and everything in between. Every name here left a mark on Viking MUD.</p>
-    <div class="stat-group" id="wb-stats" aria-label="Creator statistics"></div>
+    <div class="stat-group" id="wb-stats" role="group" aria-label="Creator statistics"></div>
   </div>
 </div>
 
@@ -58,10 +58,10 @@
   <div class="wrap">
     <div class="quest-filter-inner">
       <input type="search" class="quest-search" id="wb-search"
-             placeholder="Search by creator or contribution…" aria-label="Search creators" autocomplete="off" />
+             placeholder="Search by creator or contribution…" aria-label="Search creators" autocomplete="off">
       <div class="quest-filter-btns" role="group" aria-label="Sort creators">
-        <button class="filter-btn wb-sort-btn active" data-sort="count">Most active</button>
-        <button class="filter-btn wb-sort-btn" data-sort="alpha">A–Z</button>
+        <button type="button" class="filter-btn wb-sort-btn active" data-sort="count">Most active</button>
+        <button type="button" class="filter-btn wb-sort-btn" data-sort="alpha">A–Z</button>
       </div>
       <span class="quest-count" id="wb-count" aria-live="polite" aria-atomic="true"></span>
     </div>
@@ -71,7 +71,7 @@
 
 <div class="wb-grid-section">
   <div class="wrap">
-    <div class="wb-grid" id="wb-grid" aria-label="Creator list">
+    <div class="wb-grid" id="wb-grid">
       <div class="wb-loading">Loading creators…</div>
     </div>
   </div>

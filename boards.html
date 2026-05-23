@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="midnight" data-density="regular">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Viking MUD — Boards</title>
 <meta name="description" content="Read the latest notes from Viking MUD's in-game bulletin boards — announcements, world updates, and community discussion.">
 <meta name="author" content="Viking MUD Administration">
@@ -87,6 +87,7 @@
 
     <!-- Left: thread list -->
     <div class="boards-left" id="boards-left" tabindex="-1">
+      <!-- html-validate-disable-next prefer-native-element -- custom listbox component, not a simple select -->
       <ul
         class="thread-list"
         role="listbox"
@@ -107,15 +108,14 @@
         </p>
       </div>
 
-      <div
+      <section
         class="thread-detail"
         id="thread-detail"
-        role="region"
         aria-label="Thread contents"
         aria-live="polite"
         tabindex="-1"
         hidden
-      ></div>
+      ></section>
 
     </div>
   </div>
