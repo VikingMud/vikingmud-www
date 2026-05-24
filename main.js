@@ -275,7 +275,7 @@ async function loadArchList() {
   }
 }
 
-loadArchList();
+if (document.getElementById('arch-tbody')) loadArchList();
 
 // ─────────────────────────────────────────────────────────────────────────────
 
