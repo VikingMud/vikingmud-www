@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight" data-density="regular">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viking MUD — Game Rules</title>
+<meta name="description" content="The in-game rules for playing Viking MUD — covering playerkilling, multiplaying, robots, character sharing, quest help, bugs, behaviour, and more.">
+<meta name="author" content="Viking MUD Administration">
+<link rel="canonical" href="https://www.vikingmud.org/mudrules.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Viking MUD">
+<meta property="og:url" content="https://www.vikingmud.org/mudrules.html">
+<meta property="og:title" content="Viking MUD — Game Rules">
+<meta property="og:description" content="The in-game rules for playing Viking MUD — covering playerkilling, multiplaying, robots, character sharing, quest help, bugs, behaviour, and more.">
+<meta property="og:image" content="https://www.vikingmud.org/yggdrasil.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Viking MUD — Game Rules">
+<meta name="twitter:description" content="The in-game rules for playing Viking MUD — covering playerkilling, multiplaying, robots, character sharing, quest help, bugs, behaviour, and more.">
+<link rel="icon" href="yggdrasil.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ── Nav ──────────────────────────────────────────────────────────── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">ᚢ</span>
+      <span class="brand-text">
+        <span class="brand-name">Viking MUD</span>
+        <span class="brand-sub">est. 1991 · Oslo</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="primary">
+      <a href="index.html#connect">Play</a>
+      <a href="index.html#guilds">Guilds</a>
+      <a href="index.html#news">News</a>
+      <a href="guide.html">Guide</a>
+      <a href="index.html#admin">Admin</a>
+      <a href="index.html#community">Community</a>
+      <a href="organization/">Org</a>
+    </nav>
+    <div class="nav-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span id="live-nav-status" aria-live="polite" aria-atomic="true">Connecting…</span>
+    </div>
+  </div>
+</header>
+<main id="main-content">
+
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<div class="guide-header">
+  <div class="wrap guide-wrap">
+    <span class="eyebrow">Game Rules</span>
+    <h1 class="h-1">The rules of<br>the realm.</h1>
+    <p class="lede">
+      All games have rules — even those that say "anything goes." Viking MUD's
+      rules exist to keep the game fair and enjoyable for everyone. They are
+      arbitrated by the administration, represented by the Law department's
+      arch wizards.
+    </p>
+    <p class="lede">
+      In order to play, you must agree to our
+      <a href="terms.html" class="accent-link">Terms of Service</a>
+      and <a href="privacy.html" class="accent-link">Privacy Policy</a>.
+      Contributors also agree to the
+      <a href="creator_guide.html" class="accent-link">Contributor Agreement</a>.
+    </p>
+  </div>
+</div>
+
+<!-- ── Table of contents ─────────────────────────────────────────────── -->
+<nav class="guide-toc" aria-label="Contents">
+  <div class="wrap">
+    <ol>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#rule-1">1. Playerkilling</a></li>
+      <li><a href="#rule-2">2. Multiplaying</a></li>
+      <li><a href="#rule-3">3. Robots / automatic playing</a></li>
+      <li><a href="#rule-4">4. Character sharing</a></li>
+      <li><a href="#rule-5">5. Quest help</a></li>
+      <li><a href="#rule-6">6. Bugs, features and anomalies</a></li>
+      <li><a href="#rule-7">7. Offensive / menacing behaviour or names</a></li>
+      <li><a href="#rule-9">9. Law</a></li>
+      <li><a href="#rule-10">10. Denial of Service attacks</a></li>
+      <li><a href="#archwizards">Arch Wizards and Administrators</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ── Introduction ──────────────────────────────────────────────────── -->
+<section id="introduction" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Introduction</h2>
+    <p>
+      All games have a basic set of rules, even if that set of rules is
+      "anything goes." On Viking MUD, we used to have a pretty loose set of
+      rules, leaving much to the supposed common sense of the players. With
+      the increased popularity of the Internet from 1995 and forward,
+      however, it seemed that more detailed rules were necessary. So for
+      us, "anything goes" is <strong>not</strong> the rule.
+    </p>
+    <p>
+      You are expected to follow common sense and generally be nice to other
+      people.
+    </p>
+    <p>
+      Be aware that the rules must not be interpreted too literally. Please
+      note that the rules aren't necessarily very specific — this is
+      intentional. If there is something you find unclear about the rules,
+      ask an arch (those who show up on <span class="cmd-inline">who -a</span>,
+      with <em>(Arch)</em> or <em>(Admin)</em> in front of their names),
+      preferably someone within the Law department
+      (<span class="cmd-inline">help law</span>).
+    </p>
+    <p>
+      The final authority on the rules of Viking MUD is the administration
+      (those who are Administrators).
+    </p>
+    <p>
+      Also remember that Viking MUD is a game, wherein you have no rights,
+      although you usually are treated as if you have some. The world of
+      Viking MUD is imperfect; it is not concealed that there can be real
+      persons behind a character's name, which makes "real roleplaying" near
+      impossible. Keep this in mind!
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 1 ─────────────────────────────────────────────────────────── -->
+<section id="rule-1" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>1. Playerkilling</h2>
+    <p>
+      Do not attack or kill players except in areas where it is specifically
+      allowed, even if they make you angry. See also rule 7.
+    </p>
+    <p>
+      This includes some cases of indirect playerkilling, such as leading
+      other players into deathtraps.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 2 ─────────────────────────────────────────────────────────── -->
+<section id="rule-2" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>2. Multiplaying</h2>
+    <ol type="a">
+      <li>
+        <p>
+          You may not be logged on with more than one character at a time.
+          This does not apply to registered test characters being logged on
+          at the same times as the owning wizard character.
+          <strong>Note:</strong> A linkdead character still counts as being
+          logged on, and so does using Guest.
+        </p>
+      </li>
+      <li>
+        <p>
+          You may not use one of your characters for the benefit of another
+          of your characters. This applies to all characters you may have.
+          This includes transferring money and equipment through other
+          people's characters.
+        </p>
+        <p>
+          <strong>Note:</strong> This rule also extends to Artifacts who help
+          a player gain equipment and then log on with another character and
+          receive that equipment or any form of compensation.
+        </p>
+      </li>
+      <li>
+        <p>You are allowed to have at most one wizard character.</p>
+      </li>
+    </ol>
+    <p>
+      Be aware that logging in from the same computer — like sitting at the
+      same keyboard when playing — could lead to misunderstandings. Please
+      do your best to avoid such situations, and try to use different
+      computers with different IP addresses. If you have to use the same
+      computer (and therefore the same IP address), we recommend you tell
+      Law about this in advance (send a mail!). It is also an advantage not
+      to use the same user account, as this is one of the clearest signs
+      Law has to go by, and also because it is most likely against the
+      policies of most ISPs.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 3 ─────────────────────────────────────────────────────────── -->
+<section id="rule-3" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>3. Robots / automatic playing</h2>
+    <ol type="a">
+      <li>
+        <p>
+          Your character is supposed to be played by you yourself, as opposed
+          to by a program. Using tools like specialized clients to aid you in
+          your playing is OK, but using such tools to actually play for you is
+          not.
+        </p>
+        <p>
+          When you are not at your computer or terminal, your character should
+          be idle — do not use any tools to make your character look active
+          when you are not. It does not matter for how long you do this; if an
+          arch finds you to be a robot or "triggeridling", you risk getting
+          thrown out of the game immediately.
+        </p>
+        <p>
+          Any type of trigger is considered illegal if it can unidle your
+          character by sending data to the MUD, triggered by any text executed
+          by any object in the game. This goes for user tells and echos also.
+        </p>
+      </li>
+      <li>
+        <p>Idling in a party in order to gain experience is also considered automatic playing.</p>
+      </li>
+    </ol>
+    <p>
+      If you are too busy to play your character at the moment, take a break
+      or leave the game.
+    </p>
+    <p>
+      <strong>Final conclusion:</strong> Turn off all your triggers and turn
+      off party follow when you leave the terminal. If you appear to be at
+      your terminal, you are expected to respond to arches within a
+      reasonable amount of time.
+    </p>
+    <p>
+      If you think you have a good reason to make and use a robot, contact
+      the administration (mail <span class="cmd-inline">admin</span>), and
+      your request will be considered.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 4 ─────────────────────────────────────────────────────────── -->
+<section id="rule-4" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>4. Character sharing (borrowing/lending)</h2>
+    <p>
+      Your character is personal, and should not be used by others.
+    </p>
+    <p>
+      You may not give away your password or allow others to play your
+      character, whether you are away or present. You may not give your
+      character away permanently, sell it, or transfer it.
+    </p>
+    <p>
+      It is also illegal to use your character as a point of transfer
+      between other characters, including your own. Consider this rule in
+      combination with rules 2 and 3.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 5 ─────────────────────────────────────────────────────────── -->
+<section id="rule-5" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>5. Quest help</h2>
+    <p>
+      Don't walk people through quests. One small hint ought to be enough to
+      help someone on their way. The quests are there for people to solve,
+      not for you to solve them for others.
+    </p>
+    <p>
+      Helping people with difficult kills or in cases where there is a
+      physical need for two characters is okay, but don't overdo it. Ask a
+      QC Arch if you're in doubt whether the quest in question is meant for
+      several players.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 6 ─────────────────────────────────────────────────────────── -->
+<section id="rule-6" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>6. Bugs, features and anomalies</h2>
+    <p>
+      The lines between the three can often be very thin — report strange
+      things to the creator of the area or the QC arches (mail
+      <span class="cmd-inline">qc</span>).
+    </p>
+    <p>
+      If you discover something strange in the game — an anomaly — that
+      either harms you, traps you, or otherwise affects gameplay in a way
+      you didn't expect, the administration and the creator really want to
+      know in order to look into it (<span class="cmd-inline">help rep</span>).
+    </p>
+    <p>
+      Examples of anomalies: earning several hundreds of thousands of
+      experience points or money in a very short time; a wizard handing you
+      an item and telling you it's okay — don't trust this unless they are
+      an archwizard or admin.
+    </p>
+    <p>
+      If you discover such an anomaly and report it at once, it will be
+      fixed as soon as possible. Repeated failure to report bugs you ought
+      to recognise is illegal.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 7 ─────────────────────────────────────────────────────────── -->
+<section id="rule-7" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>7. Offensive / menacing behaviour or names</h2>
+    <p>
+      Players who behave in a way that is perceived by the arches as
+      offensive, obnoxious, or menacing do so at risk of losing access to
+      the game for a time ranging from days to years, possibly forever, and
+      perhaps even for the site(s) you are calling from.
+    </p>
+    <p>
+      Looting is not illegal, but repeatedly stalking or ruining the
+      gameplay for another player over a longer period of time may qualify
+      as harassment. Harassment is not tolerated.
+    </p>
+    <p>
+      Keep in mind that minors may play the game, and that swearing,
+      sexually explicit expressions, etc. may be damaging in some people's
+      view.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 9 ─────────────────────────────────────────────────────────── -->
+<section id="rule-9" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>9. Law</h2>
+    <p>
+      Never take the law into your own hands — always leave this to an arch,
+      preferably someone in the Law team.
+    </p>
+    <p>
+      If someone breaks the rules, it is up to Law to do something about
+      that, not you.
+    </p>
+    <p>
+      Revenge — petty or ingenious — is not tolerated, so harassing someone
+      because they harassed you will only get you into trouble, or lead to
+      Law ignoring your complaints.
+    </p>
+  </div>
+</section>
+
+<!-- ── Rule 10 ────────────────────────────────────────────────────────── -->
+<section id="rule-10" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>10. Denial of Service attacks</h2>
+    <p>
+      The administration cannot tolerate attempts to disrupt the regular
+      service of Viking MUD, whether they are successful or not.
+    </p>
+    <p>
+      Such attempts may include creating "lag" in the game, or other
+      methods — internal or external — for preventing the continuous running
+      of the game.
+    </p>
+    <p>
+      Severe cases will be reported to your ISP and can result in loss of
+      Internet access, as well as other privileges, depending on the
+      policies of your workplace or school.
+    </p>
+  </div>
+</section>
+
+<!-- ── Arch Wizards ───────────────────────────────────────────────────── -->
+<section id="archwizards" class="guide-sec">
+  <div class="wrap guide-wrap">
+    <h2>Arch Wizards, Administrators and Their Common Sense</h2>
+
+    <h3>Arch Wizards and Administrators are contributors</h3>
+    <p>
+      Arch Wizards and Administrators are also contributors to the game,
+      but with higher privileges and responsibility.
+    </p>
+
+    <h3>So what about rules for arch wizards and administrators?</h3>
+    <p>
+      Well, in the MUD, we have a humoristic set of arch rules, but in
+      practice, Arch Wizards are mostly bound by their common sense, and
+      answer to their superiors. Administrators are equal among themselves,
+      and, as far as the MUD is concerned, answer only to themselves and
+      their common sense.
+    </p>
+
+    <h3>What about actual, real world legislation/law?</h3>
+    <p>
+      We are not claiming to be exempt from real world legislation — this is
+      about in-game rules.
+    </p>
+    <p>
+      As an example, Arch Wizards and Administrators have access to
+      privileged tools and information, which also brings a greater
+      responsibility, particularly regarding privacy legislation.
+    </p>
+
+    <h3>Why are Arch Wizards and Administrators exempt from most rules?</h3>
+    <p>
+      Arch Wizards and Administrators sometimes have things to do which
+      would normally conflict with the rules for mortal players or normal
+      wizards. It would be very inconvenient if, for instance, an Arch
+      Wizard couldn't wander about in open areas to investigate bugs, or
+      couldn't manipulate stats and clone equipment in order to test or fix
+      problems.
+    </p>
+    <p>
+      The MUD depends on a certain level of trust between Arch Wizards and
+      Administrators, and when someone has been appointed to Arch Wizard or
+      Administrator, that is because they have earned that trust. Because of
+      that trust, in some ways there is more tolerance between Arch Wizards,
+      but also higher expectations.
+    </p>
+
+    <h3>Standards for behaviour among Arch Wizards and Administrators</h3>
+    <p>
+      A MUD should be an inclusive place, regardless of the player's
+      background, and the Arch Wizards and Administrators are the people who
+      enforce the rules of behaviour that ensure players don't behave badly
+      towards each other. As such, Arch Wizards and Administrators should
+      set the standard, and the standard should be high.
+    </p>
+    <p>
+      If you feel that an Arch Wizard crosses the line, contact someone
+      higher or equal in the MUD's power hierarchy. They will listen to what
+      you have to say and address the issue as necessary in order to resolve
+      the conflict.
+    </p>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────── -->
+</main>
+<footer>
+  <div class="wrap foot-grid">
+    <span>© 1991 — 2026 · Viking MUD</span>
+    <span>vikingmud.org · port 2001/2002</span>
+    <span><a href="guide.html" class="foot-back">← Back to guide</a></span>
+    <span>Maintained by the administration</span>
+  </div>
+</footer>
+
+<script src="main.js" defer></script>
+
+</body>
+</html>

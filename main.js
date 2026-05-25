@@ -191,6 +191,9 @@ function renderNews(items) {
   const grid = document.getElementById('news-grid');
   if (!grid) return;
   const total = items.length;
+  const cols = 3;
+  const fillerCount = (cols - (total % cols)) % cols;
+  const fillers = '<div class="news-item" aria-hidden="true"></div>'.repeat(fillerCount);
   grid.innerHTML = items.map((item, i) => `
     <article class="news-item${item.feature === 'true' ? ' feature' : ''}">
       <div class="row">
@@ -201,7 +204,7 @@ function renderNews(items) {
       ${item.author ? `<span class="news-author">${item.author}</span>` : ''}
       <p class="news-excerpt">${item.excerpt}</p>
       <div class="news-foot"><span>${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}</span></div>
-    </article>`).join('');
+    </article>`).join('') + fillers;
 
   const latest = items.reduce((a, b) => a.date > b.date ? a : b);
   const el = document.getElementById('live-news-date');
@@ -251,7 +254,7 @@ const DEPT_ORDER  = ['driver', 'law', 'mudlib', 'qc', 'web', 'server', 'doc'];
 
 async function loadArchList() {
   try {
-    const data = await fetch('https://www.vikingmud.org/archlist.json').then(r => r.json());
+    const data = await fetch('/archlist.json').then(r => r.json());
     const byPerson = {};
     for (const [dept, names] of Object.entries(data.responsibilitiy)) {
       for (const name of names) {

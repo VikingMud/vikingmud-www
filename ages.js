@@ -10,13 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(text => {
       const entries = [];
       for (const line of text.trim().split('\n')) {
-        const m = line.match(/^(\d+)\.\s+(\S+)\s+(\d+) days, (\d+) hours, (\d+) minutes and (\d+) seconds/);
+        const m = line.match(/^(\d+)\.\s+(\S+)\s+(.+)$/);
         if (!m) continue;
-        const [, rank, name, days, hours, mins] = m;
-        const totalDays = parseInt(days, 10);
+        const [, rank, name, timeStr] = m;
+        const days  = parseInt((timeStr.match(/(\d+) days?/)    || [0,0])[1], 10);
+        const hours = parseInt((timeStr.match(/(\d+) hours?/)   || [0,0])[1], 10);
+        const mins  = parseInt((timeStr.match(/(\d+) minutes?/) || [0,0])[1], 10);
+        const totalDays = days;
         const years = Math.floor(totalDays / 365.25);
         const remDays = totalDays - Math.floor(years * 365.25);
-        entries.push({ rank: parseInt(rank, 10), name, totalDays, years, remDays, hours: parseInt(hours, 10), mins: parseInt(mins, 10) });
+        entries.push({ rank: parseInt(rank, 10), name, totalDays, years, remDays, hours, mins });
       }
 
       if (!entries.length) {
