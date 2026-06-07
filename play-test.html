@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wrap test</title>
+  <link rel="stylesheet" href="lib/xterm.css">
+  <link rel="stylesheet" href="lib/xterm-dynamic.css" id="xterm-dyn">
+  <link rel="stylesheet" href="play.css">
+  <style>
+    #controls {
+      position: fixed;
+      top: 50px;
+      right: 0;
+      background: #1a1e28;
+      border-left: 1px solid rgba(212,180,114,.3);
+      padding: 10px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font: 11px "IBM Plex Mono", monospace;
+      color: #d4b472;
+      width: 220px;
+    }
+    #controls button {
+      background: #07090d;
+      color: #d4b472;
+      border: 1px solid rgba(212,180,114,.3);
+      padding: 4px 8px;
+      cursor: pointer;
+      font: 11px "IBM Plex Mono", monospace;
+      text-align: left;
+    }
+    #controls button:hover { border-color: #d4b472; }
+    #info { color: #66cccc; margin-bottom: 4px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+<div id="page">
+  <header class="play-header">
+    <div class="brand-text">
+      <span class="brand-name">Wrap Test</span>
+    </div>
+    <div id="info-bar" style="font:11px monospace;color:#66cccc;"></div>
+  </header>
+  <div id="term-box"></div>
+  <div id="bar">
+    <input id="cmd" type="text" placeholder="type here…"
+           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <button type="button" id="sendbtn">Send</button>
+  </div>
+</div>
+
+<div id="controls">
+  <div id="info">term.cols: –<br>safeCols: –<br>cellPx: –<br>viewport.cw: –</div>
+  <button onclick="sendRuler()">Ruler (every 10 cols)</button>
+  <button onclick="sendLen(safeCols - 1)">safeCols-1 chars</button>
+  <button onclick="sendLen(safeCols)">safeCols chars (edge)</button>
+  <button onclick="sendLen(safeCols + 1)">safeCols+1 chars (wrap)</button>
+  <button onclick="sendLen(term.cols - 1)">term.cols-1 chars</button>
+  <button onclick="sendLen(term.cols)">term.cols chars</button>
+  <button onclick="sendWords(safeCols - 1)">Words &lt; safeCols</button>
+  <button onclick="sendWords(safeCols + 10)">Words &gt; safeCols</button>
+  <button onclick="sendMUD()">MUD room desc (~162 ch)</button>
+  <button onclick="sendAnsi()">Colored line ~162 ch</button>
+  <button onclick="term.clear()">Clear</button>
+</div>
+
+<script src="lib/xterm.min.js"></script>
+<script src="lib/xterm-addon-fit.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var safeCols = 70;
+
+  function measureSafeCols() {
+    var xtermEl  = term.element;
+    if (!xtermEl || !term.cols) { safeCols = Math.max(20, (term.cols || 80) - 4); updateInfo(); return; }
+    var screen   = xtermEl.querySelector('.xterm-screen');
+    var viewport = xtermEl.querySelector('.xterm-viewport');
+    if (screen && viewport && term.cols > 0) {
+      var screenPx = screen.getBoundingClientRect().width;
+      var usablePx = viewport.clientWidth;
+      if (screenPx > 0 && usablePx > 0) {
+        var cellPx = screenPx / term.cols;
+        safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 1);
+        updateInfo(screenPx, usablePx, cellPx);
+        return;
+      }
+    }
+    safeCols = Math.max(20, term.cols - 4);
+    updateInfo();
+  }
+
+  function updateInfo(screenPx, usablePx, cellPx) {
+    var el = document.getElementById('info');
+    el.innerHTML =
+      'term.cols: ' + term.cols + '<br>' +
+      'safeCols: ' + safeCols + '<br>' +
+      'cellPx: ' + (cellPx ? cellPx.toFixed(3) : '–') + '<br>' +
+      'viewport.cw: ' + (usablePx || '–') + '<br>' +
+      'screen.w: ' + (screenPx || '–');
+    document.getElementById('info-bar').textContent =
+      'term.cols=' + term.cols + '  safeCols=' + safeCols;
+  }
+
+  var term = new Terminal({
+    cursorBlink:     true,
+    convertEol:      true,
+    scrollback:      5000,
+    fontSize:        14,
+    fontFamily:      '"IBM Plex Mono", Menlo, Consolas, "Courier New", monospace',
+    fontWeight:      '400',
+    fontWeightBold:  '600',
+    theme: {
+      background:  '#07090d', foreground: '#d4b472',
+      cursor:      '#e9e2cf', cursorAccent: '#07090d',
+      selectionBackground: '#2a2314',
+    },
+  });
+
+  var fit = new FitAddon.FitAddon();
+  term.loadAddon(fit);
+
+  document.fonts.ready.then(function () {
+    term.open(document.getElementById('term-box'));
+    requestAnimationFrame(function () {
+      fit.fit(); measureSafeCols();
+      setTimeout(function () { fit.fit(); measureSafeCols(); }, 150);
+    });
+  });
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { fit.fit(); measureSafeCols(); }, 50);
+  });
+
+  // ── helpers ──────────────────────────────────────────────────────────────
+
+  function wrapText(text) {
+    var ANSI  = /\x1b\[[0-9;?]*[A-Za-z]/g;
+    var lines = text.split('\n');
+    var out   = '';
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      if (!line) { out += '\r\n'; continue; }
+      var vis = line.replace(ANSI, '');
+      out += (vis.length >= safeCols ? wrapLine(line, safeCols) : line) + '\r\n';
+    }
+    return out;
+  }
+
+  function wrapLine(line, cols) {
+    var rows = [];
+    while (line.length > 0) {
+      var visCount = 0, lastSpaceAt = -1, i = 0;
+      while (i < line.length && visCount < cols) {
+        var ansi = line.slice(i).match(/^\x1b\[[0-9;?]*[A-Za-z]/);
+        if (ansi) { i += ansi[0].length; continue; }
+        if (line[i] === ' ') lastSpaceAt = i;
+        visCount++;
+        i++;
+      }
+      if (i >= line.length) { rows.push(line); break; }
+      var breakAt = lastSpaceAt !== -1 ? lastSpaceAt : i;
+      rows.push(line.slice(0, breakAt));
+      line = line.slice(breakAt).replace(/^ /, '');
+    }
+    return rows.join('\r\n');
+  }
+
+  function inject(text) {
+    // Simulate exactly what ws.onmessage does for complete lines
+    var normalised = text.replace(/\r\n/g, '\n');
+    if (!normalised.endsWith('\n')) normalised += '\n';
+    term.write(wrapText(normalised), function () { term.scrollToBottom(); });
+  }
+
+  // ── test functions (called by buttons) ──────────────────────────────────
+
+  window.sendRuler = function () {
+    // Print a ruler: 1234567890 repeated, with column markers every 10
+    var ruler = '';
+    for (var c = 1; c <= term.cols + 20; c++) {
+      ruler += (c % 10 === 0) ? String(c / 10 % 10) : (c % 10);
+    }
+    // Show two rulers: raw (no JS wrap) and wrapped version
+    term.write('\x1b[36mRAW xterm ruler (no JS wrap):\x1b[0m\r\n');
+    term.write(ruler + '\r\n');
+    term.write('\x1b[36mJS-wrapped ruler (should break before right edge):\x1b[0m\r\n');
+    inject(ruler);
+    term.write('\x1b[36msafeCols=' + safeCols + '  term.cols=' + term.cols + '\x1b[0m\r\n');
+    term.scrollToBottom();
+  };
+
+  window.sendLen = function (n) {
+    n = Math.max(1, Math.round(n));
+    var line = '';
+    for (var i = 0; i < n; i++) line += String.fromCharCode(65 + (i % 26));
+    var label = '\x1b[33m[' + n + ' chars, safeCols=' + safeCols + ']\x1b[0m ';
+    inject(label + line);
+  };
+
+  window.sendWords = function (targetLen) {
+    var words = ['You','are','on','a','short','path','leading','towards','the',
+                 'Arena.','There','is','some','small','shrubbery','lining','the',
+                 'road','all','the','way','to','the','entrance.','There','is','a',
+                 'small','yard','to','the','east'];
+    var line = '';
+    while (line.length < targetLen) {
+      line += (line ? ' ' : '') + words[line.split(' ').length % words.length];
+    }
+    inject(line);
+  };
+
+  window.sendMUD = function () {
+    // The actual room description visible in the screenshot (~162 chars)
+    inject('You are on a short path leading towards the Arena.  There is some small shrubbery lining the road all the way to the entrance. There is a small yard to the east');
+    inject('and if you continue north you will reach the entrance. A hole in the shrubbery has been made leading west.');
+    inject('    There are three obvious exits: east, north and west');
+  };
+
+  window.sendAnsi = function () {
+    inject('\x1b[32mYou\x1b[0m are on a short path leading towards the \x1b[33mArena\x1b[0m.  There is some small shrubbery lining the road all the way to the \x1b[36mentrance\x1b[0m. There is a small yard to the east');
+  };
+
+  // ── input bar ────────────────────────────────────────────────────────────
+
+  var cmdEl = document.getElementById('cmd');
+  document.getElementById('sendbtn').addEventListener('click', function () {
+    var val = cmdEl.value; cmdEl.value = '';
+    if (val) inject(val);
+  });
+  cmdEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); inject(cmdEl.value); cmdEl.value = ''; }
+  });
+}());
+</script>
+</body>
+</html>
