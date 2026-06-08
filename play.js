@@ -14,44 +14,71 @@ function measureSafeCols() {
     return; 
   }
 
+  // 1. Measure the visible parent element instead of the expanding terminal itself
+  var parentBox = xtermEl.parentElement;
   var viewport = xtermEl.querySelector('.xterm-viewport');
-  if (viewport) {
-    var usablePx = viewport.clientWidth; // Width of the container minus scrollbars
+  var usablePx = parentBox ? parentBox.clientWidth : (viewport ? viewport.clientWidth : 0);
 
-    if (usablePx > 0) {
-      // 1. Create a dummy element to measure actual font character width
+  if (usablePx > 0) {
+    var cellPx = 0;
+
+    // 2. Extract the absolute truth directly from xterm.js's internal rendering engine
+    if (term._core && term._core._renderService && term._core._renderService.dimensions) {
+      cellPx = term._core._renderService.dimensions.actualCellWidth;
+    }
+
+    // 3. Fallback to the DOM dummy element method if xterm isn't fully initialized yet
+    if (!cellPx || cellPx <= 0) {
       var dummy = document.createElement('span');
-      
-      // Pull font options directly from the xterm instance
       dummy.style.fontFamily = term.options.fontFamily || 'monospace';
       dummy.style.fontSize = (term.options.fontSize || 15) + 'px';
-      dummy.style.letterSpacing = term.options.letterSpacing || 'normal';
-      
-      // Hide it from view but keep it measurable
+	dummy.style.letterSpacing = "1px"; //term.options.letterSpacing || 'normal';
       dummy.style.position = 'absolute';
       dummy.style.visibility = 'hidden';
       dummy.style.whiteSpace = 'pre';
-      
-      // Use a repeating character string to smooth out subpixel rounding issues
       dummy.textContent = 'WWWWWWWWWW'; 
       document.body.appendChild(dummy);
       
-      // 2. Calculate the exact width of a single cell 
-	var cellPx = (dummy.getBoundingClientRect().width / 10) * 1.1; // Works with 1.1.. not 1.0 Why?
+      cellPx = dummy.getBoundingClientRect().width / 10;
       document.body.removeChild(dummy);
+    }
 
-      if (cellPx > 0) {
-        // 3. Divide real real estate by real character width
-        safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 4);
-        return;
-      }
+    if (cellPx > 0) {
+      // 4. Subtracting 4 accounts for any scrollbars, container margins, or padding
+	safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 4);
+      return;
     }
   }
 
-  // Fallback if DOM measurements fail
+  // Final fallback
   safeCols = Math.max(20, (term.cols || 80) - 4);
 }
     
+  function measureSafeCols2() {
+    var core = term._core;
+    var parentEl = term.element && term.element.parentElement;
+    if (!core || !parentEl) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
+
+    // css.cell.width is the value FitAddon divides by — use the same source.
+    // Falls back to _charSizeService.width if renderService isn't ready yet.
+    var dims   = core._renderService && core._renderService.dimensions;
+    var cellPx = (dims && dims.css && dims.css.cell && dims.css.cell.width) ||
+        (core._charSizeService && core._charSizeService.width);
+    if (!cellPx || cellPx <= 0) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
+
+    var parentStyle = window.getComputedStyle(parentEl);
+    var leftPad  = parseInt(parentStyle.getPropertyValue('padding-left'))  || 0;
+    var rightPad = parseInt(parentStyle.getPropertyValue('padding-right')) || 0;
+    var contentPx = parentEl.getBoundingClientRect().width - leftPad - rightPad;
+    var visiblePx = Math.min(window.innerWidth - leftPad, contentPx);
+
+    if (visiblePx > 0) {
+      safeCols = Math.max(20, Math.floor(visiblePx / cellPx));
+      return;
+    }
+
+    safeCols = Math.max(20, (term.cols || 80) - 4);
+  }
 
 
   var term = new Terminal({
@@ -79,17 +106,34 @@ function measureSafeCols() {
     },
   });
 
+    window._term = term;
+    
   var fit = new FitAddon.FitAddon();
   term.loadAddon(fit);
 
-  // Wait for all fonts to settle so xterm measures character width correctly
-  document.fonts.ready.then(function () {
-    term.open(document.getElementById('term-box'));
+  // document.fonts.load() waits for the specific font file to download before
+  // the terminal opens, so xterm measures IBM Plex Mono directly instead of
+  // falling back to Menlo/Consolas (~7.7 px vs ~8.75 px = ~14% error in cols).
+  Promise.all([
+    document.fonts.load('400 14px "IBM Plex Mono"'),
+    document.fonts.load('600 14px "IBM Plex Mono"'),
+  ]).catch(function () { return []; }).then(function () {
     requestAnimationFrame(function () {
-      fit.fit(); measureSafeCols();
-      // Re-fit after fonts fully apply to ensure correct cell-width measurement
-      setTimeout(function () { fit.fit(); measureSafeCols(); }, 150);
-      cmdEl.focus();
+      term.open(document.getElementById('term-box'));
+      requestAnimationFrame(function () {
+        fit.fit(); measureSafeCols();
+        // The first measurement above often uses the fallback font because IBM
+        // Plex Mono, though downloaded, isn't applied to the terminal DOM yet.
+        // Force a re-measure after one more layout cycle so xterm sees the real
+        // font width before computing the final column count.
+        setTimeout(function () {
+          var svc = term._core && term._core._charSizeService;
+          if (svc && typeof svc.measure === 'function') svc.measure();
+          fit.fit();
+          measureSafeCols();
+        }, 150);
+        cmdEl.focus();
+      });
     });
   });
 
@@ -226,20 +270,15 @@ function measureSafeCols() {
         visCount++;
         i++;
       }
-	console.log("VisCount is: "+visCount+" i is: "+i+ " line length is:"+line.length);	
       if (i >= line.length) {
-        // Consumed the entire remaining text — it fits
         rows.push(line);
-        console.log("1 Adding line: "+line+" "+line.length);
         break;
       }
-       
+
       // Break at last space, or hard-break at cols if no space found
       var breakAt = lastSpaceAt !== -1 ? lastSpaceAt : i;
       rows.push(line.slice(0, breakAt));
-	console.log("2 Adding line: "+line.slice(0, breakAt)+ " length: "+line.slice(0, breakAt).length);
-	
-      line = line.slice(breakAt).replace(/^ /, ''); // skip the space
+      line = line.slice(breakAt).replace(/^ /, '');
     }
     return rows.join('\r\n');
   }

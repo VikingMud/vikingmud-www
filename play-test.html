@@ -10,10 +10,10 @@
   <style>
     #controls {
       position: fixed;
-      top: 50px;
-      right: 0;
+      top: 0;
+      left: 0;
       background: #1a1e28;
-      border-left: 1px solid rgba(212,180,114,.3);
+      border-right: 1px solid rgba(212,180,114,.3);
       padding: 10px;
       z-index: 100;
       display: flex;
@@ -22,6 +22,8 @@
       font: 11px "IBM Plex Mono", monospace;
       color: #d4b472;
       width: 220px;
+      height: 100vh;
+      overflow-y: auto;
     }
     #controls button {
       background: #07090d;
@@ -37,7 +39,7 @@
   </style>
 </head>
 <body>
-<div id="page">
+<div id="page" style="margin-left:220px">
   <header class="play-header">
     <div class="brand-text">
       <span class="brand-name">Wrap Test</span>
@@ -77,21 +79,15 @@
 
   function measureSafeCols() {
     var xtermEl  = term.element;
-    if (!xtermEl || !term.cols) { safeCols = Math.max(20, (term.cols || 80) - 4); updateInfo(); return; }
-    var screen   = xtermEl.querySelector('.xterm-screen');
-    var viewport = xtermEl.querySelector('.xterm-viewport');
-    if (screen && viewport && term.cols > 0) {
-      var screenPx = screen.getBoundingClientRect().width;
-      var usablePx = viewport.clientWidth;
-      if (screenPx > 0 && usablePx > 0) {
-        var cellPx = screenPx / term.cols;
-        safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 1);
-        updateInfo(screenPx, usablePx, cellPx);
-        return;
-      }
+    var screen   = xtermEl ? xtermEl.querySelector('.xterm-screen') : null;
+    var viewport = xtermEl ? xtermEl.querySelector('.xterm-viewport') : null;
+    var screenPx = screen   ? screen.getBoundingClientRect().width : 0;
+    var usablePx = viewport ? viewport.clientWidth : 0;
+    var cellPx   = (screenPx > 0 && term.cols > 0) ? screenPx / term.cols : 0;
+    if (term.cols > 0) {
+      safeCols = Math.max(20, term.cols - 2);
     }
-    safeCols = Math.max(20, term.cols - 4);
-    updateInfo();
+    updateInfo(screenPx, usablePx, cellPx);
   }
 
   function updateInfo(screenPx, usablePx, cellPx) {
@@ -125,10 +121,12 @@
   term.loadAddon(fit);
 
   document.fonts.ready.then(function () {
-    term.open(document.getElementById('term-box'));
     requestAnimationFrame(function () {
-      fit.fit(); measureSafeCols();
-      setTimeout(function () { fit.fit(); measureSafeCols(); }, 150);
+      term.open(document.getElementById('term-box'));
+      requestAnimationFrame(function () {
+        fit.fit(); measureSafeCols();
+        setTimeout(function () { fit.fit(); measureSafeCols(); }, 150);
+      });
     });
   });
 
