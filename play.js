@@ -7,73 +7,35 @@
   // Conservative default until the first measurement runs.
   var safeCols = 70;
 
-function measureSafeCols() {
-  var xtermEl = term.element;
-  if (!xtermEl) { 
-    safeCols = Math.max(20, (term.cols || 80) - 4); 
-    return; 
-  }
+  function measureSafeCols() {
+    var xtermEl = term.element;
+    if (!xtermEl) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
 
-  // 1. Measure the visible parent element instead of the expanding terminal itself
-  var parentBox = xtermEl.parentElement;
-  var viewport = xtermEl.querySelector('.xterm-viewport');
-  var usablePx = parentBox ? parentBox.clientWidth : (viewport ? viewport.clientWidth : 0);
+    var parentBox = xtermEl.parentElement;
+    var usablePx  = parentBox ? parentBox.clientWidth : 0;
+    if (!usablePx) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
 
-  if (usablePx > 0) {
+    // Measure a dummy span with +1px letter-spacing: accounts for the gap
+    // between IBM Plex Mono's raw advance width and the cell width xterm's
+    // DomRenderer actually uses (ceil(charWidth) rounds up ~1px per cell).
     var cellPx = 0;
-
-    // 2. Extract the absolute truth directly from xterm.js's internal rendering engine
-    if (term._core && term._core._renderService && term._core._renderService.dimensions) {
-      cellPx = term._core._renderService.dimensions.actualCellWidth;
-    }
-
-    // 3. Fallback to the DOM dummy element method if xterm isn't fully initialized yet
-    if (!cellPx || cellPx <= 0) {
+    {
       var dummy = document.createElement('span');
-      dummy.style.fontFamily = term.options.fontFamily || 'monospace';
-      dummy.style.fontSize = (term.options.fontSize || 15) + 'px';
-	dummy.style.letterSpacing = "1px"; //term.options.letterSpacing || 'normal';
-      dummy.style.position = 'absolute';
-      dummy.style.visibility = 'hidden';
-      dummy.style.whiteSpace = 'pre';
-      dummy.textContent = 'WWWWWWWWWW'; 
+      dummy.style.position      = 'absolute';
+      dummy.style.visibility    = 'hidden';
+      dummy.style.whiteSpace    = 'pre';
+      dummy.style.fontFamily    = term.options.fontFamily    || 'monospace';
+      dummy.style.fontSize      = (term.options.fontSize     || 14) + 'px';
+      dummy.style.fontWeight    = term.options.fontWeight    || '400';
+      dummy.style.letterSpacing = ((term.options.letterSpacing || 0) + 1) + 'px';
+      dummy.textContent = 'MMMMMMMMMM';
       document.body.appendChild(dummy);
-      
       cellPx = dummy.getBoundingClientRect().width / 10;
       document.body.removeChild(dummy);
     }
 
     if (cellPx > 0) {
-      // 4. Subtracting 4 accounts for any scrollbars, container margins, or padding
-	safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 4);
-      return;
-    }
-  }
-
-  // Final fallback
-  safeCols = Math.max(20, (term.cols || 80) - 4);
-}
-    
-  function measureSafeCols2() {
-    var core = term._core;
-    var parentEl = term.element && term.element.parentElement;
-    if (!core || !parentEl) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
-
-    // css.cell.width is the value FitAddon divides by — use the same source.
-    // Falls back to _charSizeService.width if renderService isn't ready yet.
-    var dims   = core._renderService && core._renderService.dimensions;
-    var cellPx = (dims && dims.css && dims.css.cell && dims.css.cell.width) ||
-        (core._charSizeService && core._charSizeService.width);
-    if (!cellPx || cellPx <= 0) { safeCols = Math.max(20, (term.cols || 80) - 4); return; }
-
-    var parentStyle = window.getComputedStyle(parentEl);
-    var leftPad  = parseInt(parentStyle.getPropertyValue('padding-left'))  || 0;
-    var rightPad = parseInt(parentStyle.getPropertyValue('padding-right')) || 0;
-    var contentPx = parentEl.getBoundingClientRect().width - leftPad - rightPad;
-    var visiblePx = Math.min(window.innerWidth - leftPad, contentPx);
-
-    if (visiblePx > 0) {
-      safeCols = Math.max(20, Math.floor(visiblePx / cellPx));
+      safeCols = Math.max(20, Math.floor(usablePx / cellPx) - 4);
       return;
     }
 
@@ -106,14 +68,11 @@ function measureSafeCols() {
     },
   });
 
-    window._term = term;
-    
   var fit = new FitAddon.FitAddon();
   term.loadAddon(fit);
 
-  // document.fonts.load() waits for the specific font file to download before
-  // the terminal opens, so xterm measures IBM Plex Mono directly instead of
-  // falling back to Menlo/Consolas (~7.7 px vs ~8.75 px = ~14% error in cols).
+  // Wait for IBM Plex Mono to download before opening so the dummy-span
+  // measurement in measureSafeCols() uses the real font, not the fallback.
   Promise.all([
     document.fonts.load('400 14px "IBM Plex Mono"'),
     document.fonts.load('600 14px "IBM Plex Mono"'),
@@ -122,16 +81,6 @@ function measureSafeCols() {
       term.open(document.getElementById('term-box'));
       requestAnimationFrame(function () {
         fit.fit(); measureSafeCols();
-        // The first measurement above often uses the fallback font because IBM
-        // Plex Mono, though downloaded, isn't applied to the terminal DOM yet.
-        // Force a re-measure after one more layout cycle so xterm sees the real
-        // font width before computing the final column count.
-        setTimeout(function () {
-          var svc = term._core && term._core._charSizeService;
-          if (svc && typeof svc.measure === 'function') svc.measure();
-          fit.fit();
-          measureSafeCols();
-        }, 150);
         cmdEl.focus();
       });
     });
