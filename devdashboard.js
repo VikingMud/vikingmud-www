@@ -26,28 +26,6 @@
     { id: 'lesson16', num: '16', title: 'Error Handling',    desc: 'Debugging strategies and common runtime errors' },
   ];
 
-  // ── Hooks list ──────────────────────────────────────────────────────────────
-  const HOOKS = [
-    '__add_alignment', '__add_hit_exp',   '__add_money',        '__attack',
-    '__bal_title',     '__bbusy_next_round','__beat_stopped',   '__bnotify_attack',
-    '__bnotify_attacking','__bprompt',    '__break',            '__btest_dark',
-    '__btoodrunk',     '__btoosoaked',    '__btoostuffed',      '__catch_tell',
-    '__chat',          '__choose_killer', '__choose_target',    '__close',
-    '__damage_dealt',  '__damage_done',   '__damage_type',      '__destroy',
-    '__die',           '__do_feeling',    '__drink',            '__drink_alco',
-    '__drop',          '__eat',           '__enter_inv',        '__feeling_occurred',
-    '__fight_beat',    '__flee',          '__get',              '__give',
-    '__heart_beat',    '__hit_player',    '__info',             '__init',
-    '__invis',         '__kill',          '__leave_inv',        '__linkdead',
-    '__long',          '__look',          '__move',             '__move_player',
-    '__open',          '__peace_beat',    '__perform_move',     '__query_skill',
-    '__quest',         '__quit',          '__receive',          '__receive_feeling',
-    '__reduce_hit_point','__reenter',     '__remove',           '__reset',
-    '__restore_spell_points','__set_alignment','__set_dead',    '__short',
-    '__vis',           '__wander',        '__wander_done',      '__wander_fail',
-    '__weapon_hit',    '__wear',          '__wear_out',         '__wield',
-    'hooklist',        'hooks.about',
-  ];
 
   // ── Color code parser (mirrors help.js) ────────────────────────────────────
   const FG = new Set([
@@ -1054,7 +1032,7 @@
   }
 
   // ── Right panel: hooks ───────────────────────────────────────────────────────
-  function renderHooks() {
+  async function renderHooks() {
     const el = document.getElementById('devdash-hooks');
     if (!el) return;
 
@@ -1082,8 +1060,11 @@
       });
     }
 
+    const { files } = await fetchListing('hooks');
+    const hookFiles = files.filter(f => f.startsWith('__')).sort();
+
     const frag = document.createDocumentFragment();
-    HOOKS.forEach(h => {
+    hookFiles.forEach(h => {
       const path = 'hooks/' + h;
       const btn  = document.createElement('button');
       btn.className = 'devdash-hook';
