@@ -82,6 +82,14 @@
       .replace(/'/g, '&#39;');
   }
 
+  function decodeMudBytes(buf) {
+    try {
+      return new TextDecoder('utf-8', { fatal: true }).decode(buf);
+    } catch (_) {
+      return new TextDecoder('iso-8859-1').decode(buf);
+    }
+  }
+
   // ── Directory fetching ──────────────────────────────────────────────────────
   function parseListing(html) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -713,7 +721,7 @@
     try {
       const r = await fetch(BASE + path);
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      const text = await r.text();
+      const text = decodeMudBytes(await r.arrayBuffer());
       cache[path] = text;
       showContent(text, path);
     } catch (err) {
